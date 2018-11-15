@@ -2,18 +2,23 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Archives: 2018 - CMouse&#39;s Blog</title>
+<title>LRU Cache - CMouse&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="CMouse&#39;s Blog">
-<meta property="og:url" content="https://cathymouse96.github.io/archives/2018/index.html">
+    <meta name="description" content="This is my solution to LeetCode’s LRU Cache problem. It is written in Python 3. In this problem, we are asked to implement an LRU cache that supports get(key) and put(key, value) in O(1) time. Intuiti">
+<meta name="keywords" content="Python 3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LRU Cache">
+<meta property="og:url" content="https://cathymouse96.github.io/2018/11/14/LRU-Cache/index.html">
 <meta property="og:site_name" content="CMouse&#39;s Blog">
+<meta property="og:description" content="This is my solution to LeetCode’s LRU Cache problem. It is written in Python 3. In this problem, we are asked to implement an LRU cache that supports get(key) and put(key, value) in O(1) time. Intuiti">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-15T03:46:49.973Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CMouse&#39;s Blog">
+<meta name="twitter:title" content="LRU Cache">
+<meta name="twitter:description" content="This is my solution to LeetCode’s LRU Cache problem. It is written in Python 3. In this problem, we are asked to implement an LRU cache that supports get(key) and put(key, value) in O(1) time. Intuiti">
 
 
 
@@ -79,7 +84,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="CMouse&#39;s Blog" height="28">
+                <img src="/images/logo.svg" alt="LRU Cache" height="28">
             
             </a>
         </div>
@@ -115,50 +120,68 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2018
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-11-15T03:16:29.000Z">2018-11-14</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-11-15T03:16:29.000Z">2018-11-14</time>
-                        <a href="/2018/11/14/LRU-Cache/" class="has-link-black-ter is-size-6">LRU Cache</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-11-15T02:42:52.544Z">2018-11-14</time>
-                        <a href="/2018/11/14/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 392 words)
+                </span>
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                LRU Cache
+            
+        </h1>
+        <div class="content">
+            <p>This is my solution to <a href="https://leetcode.com/problems/lru-cache/" target="_blank" rel="noopener">LeetCode’s LRU Cache problem</a>. It is written in Python 3. In this problem, we are asked to implement an LRU cache that supports <code>get(key)</code> and <code>put(key, value)</code> in O(1) time.</p>
+<h2 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h2><p>We can easily achieve O(1) time for <code>get(key)</code> if we use a hash table for the cache. However, we need to maintain the LRU status, or in other words, the order in which cache entries were accessed. If we do so using an array, time complexity for the operations will become O(n). So we think about using a linked list.</p>
+<a id="more"></a>
+<p>For each key in the cache, along with its value, we store a <code>prev</code> pointer and a <code>next</code> pointer. The <code>prev</code> pointer points to the entry that was accessed immediately before this entry was accessed. The <code>next</code> pointer points to the entry that was accessed immediately after this entry was accessed. We also maintain two variables <code>lru</code> and <code>mru</code>: the key that was accessed least recently and the key that was accessed most recently, respectively. The cache looks like this:</p>
+<h3 id="get-key-operation"><a href="#get-key-operation" class="headerlink" title="get(key) operation"></a>get(key) operation</h3><p>If <code>key</code> does not exist in our cache, we return -1.<br>If <code>key</code> already is the most recently accessed key (<code>mru == key</code> and <code>cache[key].next == None</code>), we do not need to make any changes to the LRU status. We simply return its value.<br>Otherwise, if <code>key</code> originally was the least recently accessed key (<code>lru == key</code> and <code>cache[key].prev == None</code>), <code>cache[key].next</code> now becomes the least recently accessed key, and <code>key</code> now becomes the most recently accessed key.<br>Otherwise, we remove <code>key</code> from its original spot and make it the most recently accessed key.<br>The code is as follows:<br><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self, key)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""</span></span><br><span class="line"><span class="hljs-string">    :type key: int</span></span><br><span class="line"><span class="hljs-string">    :rtype: int</span></span><br><span class="line"><span class="hljs-string">    """</span></span><br><span class="line">    <span class="hljs-keyword">if</span> key <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> self.cache:</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span></span><br><span class="line">    <span class="hljs-comment"># Update LRU status</span></span><br><span class="line">    value, lruprev, lrunext = self.cache[key]</span><br><span class="line">    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> lrunext: <span class="hljs-comment"># Already most recently used</span></span><br><span class="line">        <span class="hljs-keyword">pass</span></span><br><span class="line">    <span class="hljs-keyword">elif</span> <span class="hljs-keyword">not</span> lruprev: <span class="hljs-comment"># Originally least recently used</span></span><br><span class="line">        <span class="hljs-comment"># next becomes lru</span></span><br><span class="line">        self.cache[lrunext][<span class="hljs-number">1</span>] = <span class="hljs-keyword">None</span></span><br><span class="line">        self.lru = lrunext</span><br><span class="line">        <span class="hljs-comment"># key becomes mru</span></span><br><span class="line">        self.cache[self.mru][<span class="hljs-number">2</span>] = key</span><br><span class="line">        self.cache[key][<span class="hljs-number">1</span>] = self.mru</span><br><span class="line">        self.cache[key][<span class="hljs-number">2</span>] = <span class="hljs-keyword">None</span></span><br><span class="line">        self.mru = key</span><br><span class="line">    <span class="hljs-keyword">else</span>:</span><br><span class="line">        self.cache[lruprev][<span class="hljs-number">2</span>] = lrunext</span><br><span class="line">        self.cache[lrunext][<span class="hljs-number">1</span>] = lruprev</span><br><span class="line">        <span class="hljs-comment"># key becomes mru</span></span><br><span class="line">        self.cache[self.mru][<span class="hljs-number">2</span>] = key</span><br><span class="line">        self.cache[key][<span class="hljs-number">1</span>] = self.mru</span><br><span class="line">        self.cache[key][<span class="hljs-number">2</span>] = <span class="hljs-keyword">None</span></span><br><span class="line">        self.mru = key</span><br><span class="line">    <span class="hljs-keyword">return</span> value</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Python-3/">Python 3</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/11/14/hello-world/">
+                <span class="level-item">Hello World</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
     </div>
 </div>
 
@@ -404,7 +427,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="CMouse&#39;s Blog" height="28">
+                    <img src="/images/logo.svg" alt="LRU Cache" height="28">
                 
                 </a>
                 <p class="is-size-7">
