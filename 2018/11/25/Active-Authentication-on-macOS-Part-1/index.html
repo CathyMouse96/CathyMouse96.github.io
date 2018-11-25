@@ -2,19 +2,23 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Tags - CMouse&#39;s Blog</title>
+<title>Active Authentication on macOS: Part 1 - CMouse&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="keywords" content="C++,macOS,security,Python 3">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CMouse&#39;s Blog">
-<meta property="og:url" content="https://cathymouse96.github.io/tags/index.html">
+    <meta name="description" content="For our second project for COMS E6185 Intrusion Detection Systems, we are implementing an active authentication system based on user behavior. The process can be divided into four parts: collecting da">
+<meta name="keywords" content="C++,macOS,security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Active Authentication on macOS: Part 1">
+<meta property="og:url" content="https://cathymouse96.github.io/2018/11/25/Active-Authentication-on-macOS-Part-1/index.html">
 <meta property="og:site_name" content="CMouse&#39;s Blog">
+<meta property="og:description" content="For our second project for COMS E6185 Intrusion Detection Systems, we are implementing an active authentication system based on user behavior. The process can be divided into four parts: collecting da">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-25T22:02:05.212Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CMouse&#39;s Blog">
+<meta name="twitter:title" content="Active Authentication on macOS: Part 1">
+<meta name="twitter:description" content="For our second project for COMS E6185 Intrusion Detection Systems, we are implementing an active authentication system based on user behavior. The process can be divided into four parts: collecting da">
 
 
 
@@ -80,7 +84,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="CMouse&#39;s Blog" height="28">
+                <img src="/images/logo.svg" alt="Active Authentication on macOS: Part 1" height="28">
             
             </a>
         </div>
@@ -94,7 +98,7 @@
                 
                 <a class="navbar-item" href="/categories">Categories</a>
                 
-                <a class="navbar-item is-active" href="/tags">Tags</a>
+                <a class="navbar-item" href="/tags">Tags</a>
                 
                 <a class="navbar-item" href="/about">About</a>
                 
@@ -116,62 +120,77 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Tags
-            </h3>
-            <ul class="menu-list">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-11-25T21:20:07.000Z">2018-11-25</time>
                 
-                <li>
-                    <a class="level is-marginless" href="/tags/C/">
-                        <span class="level-start">
-                            <span class="level-item">C++</span>
-                        </span>
-                        <span class="level-end">
-                            <span class="level-item tag">1</span>
-                        </span>
-                    </a>
-                </li>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/IDS/">IDS</a>
+                </div>
                 
-                <li>
-                    <a class="level is-marginless" href="/tags/Python-3/">
-                        <span class="level-start">
-                            <span class="level-item">Python 3</span>
-                        </span>
-                        <span class="level-end">
-                            <span class="level-item tag">1</span>
-                        </span>
-                    </a>
-                </li>
                 
-                <li>
-                    <a class="level is-marginless" href="/tags/macOS/">
-                        <span class="level-start">
-                            <span class="level-item">macOS</span>
-                        </span>
-                        <span class="level-end">
-                            <span class="level-item tag">1</span>
-                        </span>
-                    </a>
-                </li>
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 466 words)
+                </span>
                 
-                <li>
-                    <a class="level is-marginless" href="/tags/security/">
-                        <span class="level-start">
-                            <span class="level-item">security</span>
-                        </span>
-                        <span class="level-end">
-                            <span class="level-item tag">1</span>
-                        </span>
-                    </a>
-                </li>
-                
-            </ul>
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Active Authentication on macOS: Part 1
+            
+        </h1>
+        <div class="content">
+            <p>For our second project for COMS E6185 Intrusion Detection Systems, we are implementing an active authentication system based on user behavior. The process can be divided into four parts: collecting data, constructing a model, training the model and testing the model.</p>
+<p>In this part, we collect user behavior data by recording system-level events, such as process creation and deletion and file changes [1]. We make use of the audit subsystem that comes with macOS [2]. The audit utility is started by default at system startup.</p>
+<a id="more"></a>
+<p>We can configure the audit utility by editing <code>/etc/security/audit_control</code>. The default configuration is as follows:<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># $P4: //depot/projects/trustedbsd/openbsm/etc/audit_control#8 $</span><br><span class="line">#</span><br><span class="line">dir:/var/audit</span><br><span class="line">flags:lo,aa</span><br><span class="line">minfree:5</span><br><span class="line">naflags:lo,aa</span><br><span class="line">policy:cnt,argv</span><br><span class="line">filesz:2M</span><br><span class="line">expire-after:10M</span><br><span class="line">superuser-set-sflags-mask:has_authenticated,has_console_access</span><br><span class="line">superuser-clear-sflags-mask:has_authenticated,has_console_access</span><br><span class="line">member-set-sflags-mask:</span><br><span class="line">member-clear-sflags-mask:has_authenticated</span><br></pre></td></tr></table></figure></p>
+<p>You can find a detailed explanation of the parameters by running <code>man audit_control</code>. Here, we are mainly concerned with the <code>dir</code>, <code>flags</code> and <code>naflags</code> parameters. The <code>dir</code> parameter specifies where the audit records are logged to. You can specify it to anywhere you like. The <code>flags</code> parameter specifies which classes of audit events will be audited that <em>can</em> be tied back to a specific user. The <code>naflags</code> parameter stands for nonattributable flags and specifies which classes of audit events will be audited that <em>can</em> be tied back to a specific user. [3]</p>
+<p>You can find the classes of audit events in <code>/etc/security/audit_class</code>:<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># $P4: //depot/projects/trustedbsd/openbsm/etc/audit_class#6 $</span><br><span class="line">#</span><br><span class="line">0x00000000:no:invalid class</span><br><span class="line">0x00000001:fr:file read</span><br><span class="line">0x00000002:fw:file write</span><br><span class="line">0x00000004:fa:file attribute access</span><br><span class="line">0x00000008:fm:file attribute modify</span><br><span class="line">0x00000010:fc:file create</span><br><span class="line">0x00000020:fd:file delete</span><br><span class="line">0x00000040:cl:file close</span><br><span class="line">0x00000080:pc:process</span><br><span class="line">0x00000100:nt:network</span><br><span class="line">0x00000200:ip:ipc</span><br><span class="line">0x00000400:na:non attributable</span><br><span class="line">0x00000800:ad:administrative</span><br><span class="line">0x00001000:lo:login_logout</span><br><span class="line">0x00002000:aa:authentication and authorization</span><br><span class="line">0x00004000:ap:application</span><br><span class="line">0x20000000:io:ioctl</span><br><span class="line">0x40000000:ex:exec</span><br><span class="line">0x80000000:ot:miscellaneous</span><br><span class="line">0xffffffff:all:all flags set</span><br></pre></td></tr></table></figure></p>
+<p>Note that setting <code>flags</code> and <code>naflags</code> to <code>all</code> will take up <strong>a lot</strong> of logging space in a very short time so be careful!</p>
+<p>After we modify the audit control file, we can run <code>audit -s</code> to restart the audit system with the new configuration. Editing the configuration file and running this command should require root privileges.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h2><p>[1] Jonathan Voris, Yingbo Song, Malek Ben Salem, Shlomo Hershkop, Salvatore Stolfo, Active authentication using file system decoys and user behavior modeling: results of a large scale study, Computers &amp; Security, 2018, ISSN 0167-4048.<br>[2] Common Criteria Configuration and Administration Guide - Apple, <a href="https://images.apple.com/support/security/commoncriteria/CommonCriteriaAdminGuide.pdf" target="_blank" rel="noopener">https://images.apple.com/support/security/commoncriteria/CommonCriteriaAdminGuide.pdf</a><br>[3] OpenBSM auditing on Mac OS X, <a href="https://derflounder.wordpress.com/2012/01/30/openbsm-auditing-on-mac-os-x/" target="_blank" rel="noopener">https://derflounder.wordpress.com/2012/01/30/openbsm-auditing-on-mac-os-x/</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/C/">C++</a>, <a class="has-link-grey -link" href="/tags/macOS/">macOS</a>, <a class="has-link-grey -link" href="/tags/security/">security</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
-</div></div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/11/14/LRU-Cache/">
+                <span class="level-item">LRU Cache</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
                 
 
 
@@ -486,7 +505,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="CMouse&#39;s Blog" height="28">
+                    <img src="/images/logo.svg" alt="Active Authentication on macOS: Part 1" height="28">
                 
                 </a>
                 <p class="is-size-7">
