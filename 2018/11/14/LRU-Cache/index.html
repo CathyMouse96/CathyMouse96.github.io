@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="CMouse&#39;s Blog">
 <meta property="og:description" content="This is my solution to LeetCode’s LRU Cache problem. It is written in Python 3. In this problem, we are asked to implement an LRU cache that supports get(key) and put(key, value) in O(1) time. Intuiti">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-15T03:46:49.973Z">
+<meta property="og:updated_time" content="2018-11-25T22:58:27.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LRU Cache">
 <meta name="twitter:description" content="This is my solution to LeetCode’s LRU Cache problem. It is written in Python 3. In this problem, we are asked to implement an LRU cache that supports get(key) and put(key, value) in O(1) time. Intuiti">
@@ -136,7 +136,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 minutes read (About 392 words)
+                    3 minutes read (About 390 words)
                 </span>
                 
             </div>
@@ -149,7 +149,7 @@
         </h1>
         <div class="content">
             <p>This is my solution to <a href="https://leetcode.com/problems/lru-cache/" target="_blank" rel="noopener">LeetCode’s LRU Cache problem</a>. It is written in Python 3. In this problem, we are asked to implement an LRU cache that supports <code>get(key)</code> and <code>put(key, value)</code> in O(1) time.</p>
-<h2 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h2><p>We can easily achieve O(1) time for <code>get(key)</code> if we use a hash table for the cache. However, we need to maintain the LRU status, or in other words, the order in which cache entries were accessed. If we do so using an array, time complexity for the operations will become O(n). So we think about using a linked list.</p>
+<h2 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h2><p>We can easily achieve O(1) time for <code>get(key)</code> if we use a hash table for the cache. However, we need to maintain the LRU status, or in other words, the order in which cache entries were accessed. If we use an array, time complexity for the operations will become O(n). So we think about using a linked list.</p>
 <a id="more"></a>
 <p>For each key in the cache, along with its value, we store a <code>prev</code> pointer and a <code>next</code> pointer. The <code>prev</code> pointer points to the entry that was accessed immediately before this entry was accessed. The <code>next</code> pointer points to the entry that was accessed immediately after this entry was accessed. We also maintain two variables <code>lru</code> and <code>mru</code>: the key that was accessed least recently and the key that was accessed most recently, respectively. The cache looks like this:</p>
 <h3 id="get-key-operation"><a href="#get-key-operation" class="headerlink" title="get(key) operation"></a>get(key) operation</h3><p>If <code>key</code> does not exist in our cache, we return -1.<br>If <code>key</code> already is the most recently accessed key (<code>mru == key</code> and <code>cache[key].next == None</code>), we do not need to make any changes to the LRU status. We simply return its value.<br>Otherwise, if <code>key</code> originally was the least recently accessed key (<code>lru == key</code> and <code>cache[key].prev == None</code>), <code>cache[key].next</code> now becomes the least recently accessed key, and <code>key</code> now becomes the most recently accessed key.<br>Otherwise, we remove <code>key</code> from its original spot and make it the most recently accessed key.<br>The code is as follows:<br><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span><span class="hljs-params">(self, key)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""</span></span><br><span class="line"><span class="hljs-string">    :type key: int</span></span><br><span class="line"><span class="hljs-string">    :rtype: int</span></span><br><span class="line"><span class="hljs-string">    """</span></span><br><span class="line">    <span class="hljs-keyword">if</span> key <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> self.cache:</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span></span><br><span class="line">    <span class="hljs-comment"># Update LRU status</span></span><br><span class="line">    value, lruprev, lrunext = self.cache[key]</span><br><span class="line">    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> lrunext: <span class="hljs-comment"># Already most recently used</span></span><br><span class="line">        <span class="hljs-keyword">pass</span></span><br><span class="line">    <span class="hljs-keyword">elif</span> <span class="hljs-keyword">not</span> lruprev: <span class="hljs-comment"># Originally least recently used</span></span><br><span class="line">        <span class="hljs-comment"># next becomes lru</span></span><br><span class="line">        self.cache[lrunext][<span class="hljs-number">1</span>] = <span class="hljs-keyword">None</span></span><br><span class="line">        self.lru = lrunext</span><br><span class="line">        <span class="hljs-comment"># key becomes mru</span></span><br><span class="line">        self.cache[self.mru][<span class="hljs-number">2</span>] = key</span><br><span class="line">        self.cache[key][<span class="hljs-number">1</span>] = self.mru</span><br><span class="line">        self.cache[key][<span class="hljs-number">2</span>] = <span class="hljs-keyword">None</span></span><br><span class="line">        self.mru = key</span><br><span class="line">    <span class="hljs-keyword">else</span>:</span><br><span class="line">        self.cache[lruprev][<span class="hljs-number">2</span>] = lrunext</span><br><span class="line">        self.cache[lrunext][<span class="hljs-number">1</span>] = lruprev</span><br><span class="line">        <span class="hljs-comment"># key becomes mru</span></span><br><span class="line">        self.cache[self.mru][<span class="hljs-number">2</span>] = key</span><br><span class="line">        self.cache[key][<span class="hljs-number">1</span>] = self.mru</span><br><span class="line">        self.cache[key][<span class="hljs-number">2</span>] = <span class="hljs-keyword">None</span></span><br><span class="line">        self.mru = key</span><br><span class="line">    <span class="hljs-keyword">return</span> value</span><br></pre></td></tr></table></figure></p>
@@ -175,9 +175,9 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/11/25/Active-Authentication-on-macOS-Part-1/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/03/24/Google-CTF-Beginners-Quest-Notes/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Active Authentication on macOS: Part 1</span>
+                <span class="level-item">Google CTF Beginners Quest Notes</span>
             </a>
         </div>
         
@@ -230,7 +230,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         3
@@ -240,7 +240,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         2
@@ -250,17 +250,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        3
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/CathyMouse96">
-                Follow</a>
+                SEGUIR</a>
         </div>
         
         
@@ -296,13 +296,13 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Categorias
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/IDS/">
+        <a class="level is-marginless" href="/categories/CTF/">
             <span class="level-start">
-                <span class="level-item">IDS</span>
+                <span class="level-item">CTF</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -328,9 +328,20 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/11/">
@@ -338,7 +349,7 @@
                     <span class="level-item">November 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -352,14 +363,14 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <ul class="menu-list">
                 
                 <li>
-                    <a class="level is-marginless" href="/tags/C/">
+                    <a class="level is-marginless" href="/tags/Google-CTF/">
                         <span class="level-start">
-                            <span class="level-item">C++</span>
+                            <span class="level-item">Google CTF</span>
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">1</span>
@@ -371,17 +382,6 @@
                     <a class="level is-marginless" href="/tags/Python-3/">
                         <span class="level-start">
                             <span class="level-item">Python 3</span>
-                        </span>
-                        <span class="level-end">
-                            <span class="level-item tag">1</span>
-                        </span>
-                    </a>
-                </li>
-                
-                <li>
-                    <a class="level is-marginless" href="/tags/macOS/">
-                        <span class="level-start">
-                            <span class="level-item">macOS</span>
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">1</span>
@@ -419,9 +419,20 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/11/">
@@ -429,7 +440,7 @@
                     <span class="level-item">November 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -443,14 +454,14 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <ul class="menu-list">
                 
                 <li>
-                    <a class="level is-marginless" href="/tags/C/">
+                    <a class="level is-marginless" href="/tags/Google-CTF/">
                         <span class="level-start">
-                            <span class="level-item">C++</span>
+                            <span class="level-item">Google CTF</span>
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">1</span>
@@ -462,17 +473,6 @@
                     <a class="level is-marginless" href="/tags/Python-3/">
                         <span class="level-start">
                             <span class="level-item">Python 3</span>
-                        </span>
-                        <span class="level-end">
-                            <span class="level-item tag">1</span>
-                        </span>
-                    </a>
-                </li>
-                
-                <li>
-                    <a class="level is-marginless" href="/tags/macOS/">
-                        <span class="level-start">
-                            <span class="level-item">macOS</span>
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">1</span>
@@ -512,7 +512,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2018 CMouse&nbsp;
+                &copy; 2019 CMouse&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
                 </p>
             </div>
@@ -615,10 +615,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: 'Entradas',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

@@ -2,18 +2,27 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Archivos: 2018 - CMouse&#39;s Blog</title>
+<title>Google CTF Beginners Quest Notes - CMouse&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="CMouse&#39;s Blog">
-<meta property="og:url" content="https://cathymouse96.github.io/archives/2018/index.html">
+    <meta name="description" content="This is my first attempt at CTF and I’m stumbling along with the help of walkthroughs on Google :-) I’m posting my notes as I learn. SPOILERS ALERT! Do not keep reading if you want to solve the proble">
+<meta name="keywords" content="Google CTF,security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google CTF Beginners Quest Notes">
+<meta property="og:url" content="https://cathymouse96.github.io/2019/03/24/Google-CTF-Beginners-Quest-Notes/index.html">
 <meta property="og:site_name" content="CMouse&#39;s Blog">
+<meta property="og:description" content="This is my first attempt at CTF and I’m stumbling along with the help of walkthroughs on Google :-) I’m posting my notes as I learn. SPOILERS ALERT! Do not keep reading if you want to solve the proble">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/letter.jpeg">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/ocr_is_cool.jpeg">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/floppy.jpeg">
+<meta property="og:updated_time" content="2019-03-24T21:50:49.635Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CMouse&#39;s Blog">
+<meta name="twitter:title" content="Google CTF Beginners Quest Notes">
+<meta name="twitter:description" content="This is my first attempt at CTF and I’m stumbling along with the help of walkthroughs on Google :-) I’m posting my notes as I learn. SPOILERS ALERT! Do not keep reading if you want to solve the proble">
+<meta name="twitter:image" content="https://cathymouse96.github.io/images/googlectf/letter.jpeg">
 
 
 
@@ -79,7 +88,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="CMouse&#39;s Blog" height="28">
+                <img src="/images/logo.svg" alt="Google CTF Beginners Quest Notes" height="28">
             
             </a>
         </div>
@@ -115,50 +124,76 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2018
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-24T21:17:31.000Z">2019-03-24</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-11-15T03:16:29.000Z">2018-11-14</time>
-                        <a href="/2018/11/14/LRU-Cache/" class="has-link-black-ter is-size-6">LRU Cache</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/CTF/">CTF</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-11-15T02:42:52.544Z">2018-11-14</time>
-                        <a href="/2018/11/14/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 286 words)
+                </span>
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Google CTF Beginners Quest Notes
+            
+        </h1>
+        <div class="content">
+            <p>This is my first attempt at CTF and I’m stumbling along with the help of walkthroughs on Google :-) I’m posting my notes as I learn.</p>
+<p>SPOILERS ALERT! Do not keep reading if you want to solve the problems on your own.</p>
+<a id="more"></a>
+<h2 id="Letter"><a href="#Letter" class="headerlink" title="Letter"></a>Letter</h2><p>This is what the first challenge looks like. The username and password are blacked out, but we can still select the text and copy and paste! The flag is CTF{ICanReadDis}.</p>
+<p><img src="/images/googlectf/letter.jpeg" alt=""></p>
+<h2 id="OCR-IS-COOL"><a href="#OCR-IS-COOL" class="headerlink" title="OCR IS COOL!"></a>OCR IS COOL!</h2><p>The attachment is a screenshot like this. The text is gibberish, but we notice something suspicious: VMY{vtxltkvbiaxkbltlnulmbmnmbhgvbiaxk}. The format is suspiciously similar to our flag format: CTF{…}.</p>
+<p><img src="/images/googlectf/ocr_is_cool.jpeg" alt=""></p>
+<p>So lets say V stands for C, M stands for T and Y stands for F. Since this is an email, we can guess that it begins with “Dear xxx”. So we further guess that W stands for D, X stands for E, T stands for A and K stands for R.</p>
+<p>When we write it out, we find that it actually is the Caesar cipher. Here, every letter x is substituted by x + 19. We recover the original flag, which is CTF{caesarcipherisasubstitutioncipher}. (In hindsight, the hint “Caesar once said, don’t stab me…” makes sense!)</p>
+<h2 id="Security-by-obscurity"><a href="#Security-by-obscurity" class="headerlink" title="Security by obscurity"></a>Security by obscurity</h2><h2 id="Floppy"><a href="#Floppy" class="headerlink" title="Floppy"></a>Floppy</h2><p>I was soooo proud when I solved this, even though it is pretty easy, because it is the first challenge I ever solved on my own!</p>
+<p>The attachment is what seems like an icon - but isn’t. When we run binwalk on the icon, we get this: </p>
+<p><img src="/images/googlectf/floppy.jpeg" alt=""></p>
+<p>Yup, not an innocent image! The flag is CTF{qeY80sU6Ktko8BJW}, as we can see.</p>
+<h2 id="Floppy2"><a href="#Floppy2" class="headerlink" title="Floppy2"></a>Floppy2</h2>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Google-CTF/">Google CTF</a>, <a class="has-link-grey -link" href="/tags/security/">security</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/11/14/LRU-Cache/">
+                <span class="level-item">LRU Cache</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
     </div>
 </div>
 
@@ -478,7 +513,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="CMouse&#39;s Blog" height="28">
+                    <img src="/images/logo.svg" alt="Google CTF Beginners Quest Notes" height="28">
                 
                 </a>
                 <p class="is-size-7">
