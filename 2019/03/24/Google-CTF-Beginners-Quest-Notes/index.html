@@ -25,7 +25,9 @@
 <meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/gatekeeper_3.jpeg">
 <meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/gatekeeper_4.jpeg">
 <meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/gatekeeper_5.jpeg">
-<meta property="og:updated_time" content="2019-04-12T23:07:12.292Z">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/moar_1.jpeg">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/moar_2.jpeg">
+<meta property="og:updated_time" content="2019-04-12T23:40:29.862Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google CTF Beginners Quest Notes">
 <meta name="twitter:description" content="This is my first attempt at CTF and I’m stumbling along with the help of walkthroughs on Google :-) I’m posting my notes as I learn. SPOILERS ALERT! Do not keep reading if you want to solve the proble">
@@ -147,7 +149,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 692 words)
+                    6 minutes read (About 865 words)
                 </span>
                 
             </div>
@@ -196,6 +198,14 @@
 <p>Well, I’m sure you do :-)</p>
 <p><img src="/images/googlectf/gatekeeper_5.jpeg" alt=""></p>
 <h2 id="MEDIA-DB"><a href="#MEDIA-DB" class="headerlink" title="MEDIA_DB"></a>MEDIA_DB</h2><p>Solved 4/12/2019. </p>
+<h2 id="Moar"><a href="#Moar" class="headerlink" title="Moar"></a>Moar</h2><p>Solved 4/12/2019.</p>
+<p>Yeeeeeesssss. I’ve finally got this one. Been stuck on it for so long.</p>
+<p>So we connect to a network service with <code>nc moar.ctfcompetition.com 1337</code>. It apparently serves the man page of the <code>socat</code> command. I had no idea how to approach this and have actually tried to read the man page. (The hint did say “As the old saying goes, everything you need is in the manual.”)</p>
+<p>However, it wasn’t <code>socat</code>‘s man page I should be reading. If we press <code>h</code>, we enter the help page of <code>less</code>, which the service is using to display its pages. I’ve never scrolled down far enough before, but today I did, and I found this:</p>
+<p><img src="/images/googlectf/moar_1.jpeg" alt=""></p>
+<p>Now this looks destructive. Lets do <code>!ls</code>. We find out we are in <code>/</code>. Then we do <code>!ls /home</code>. We find a directory called <code>moar</code>. Lets do <code>!ls /home/moar</code>. We find a shell script called <code>disable_dmz.sh</code>.</p>
+<p>We execute the script and find the flag:</p>
+<p><img src="/images/googlectf/moar_2.jpeg" alt=""></p>
 
         </div>
         
