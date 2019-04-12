@@ -8,7 +8,7 @@
 
 
     <meta name="description" content="This is my first attempt at CTF and I’m stumbling along with the help of walkthroughs on Google :-) I’m posting my notes as I learn. SPOILERS ALERT! Do not keep reading if you want to solve the proble">
-<meta name="keywords" content="Google CTF,security">
+<meta name="keywords" content="security,Google CTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Google CTF Beginners Quest Notes">
 <meta property="og:url" content="https://cathymouse96.github.io/2019/03/24/Google-CTF-Beginners-Quest-Notes/index.html">
@@ -18,7 +18,14 @@
 <meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/letter.jpeg">
 <meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/ocr_is_cool.jpeg">
 <meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/floppy.jpeg">
-<meta property="og:updated_time" content="2019-03-24T21:50:49.635Z">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/js_safe_1.jpeg">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/js_safe_2.jpeg">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/gatekeeper_1.jpeg">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/gatekeeper_2.jpeg">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/gatekeeper_3.jpeg">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/gatekeeper_4.jpeg">
+<meta property="og:image" content="https://cathymouse96.github.io/images/googlectf/gatekeeper_5.jpeg">
+<meta property="og:updated_time" content="2019-04-12T23:07:12.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google CTF Beginners Quest Notes">
 <meta name="twitter:description" content="This is my first attempt at CTF and I’m stumbling along with the help of walkthroughs on Google :-) I’m posting my notes as I learn. SPOILERS ALERT! Do not keep reading if you want to solve the proble">
@@ -140,7 +147,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 286 words)
+                    5 minutes read (About 692 words)
                 </span>
                 
             </div>
@@ -154,6 +161,7 @@
         <div class="content">
             <p>This is my first attempt at CTF and I’m stumbling along with the help of walkthroughs on Google :-) I’m posting my notes as I learn.</p>
 <p>SPOILERS ALERT! Do not keep reading if you want to solve the problems on your own.</p>
+<p>Link to <a href="https://capturetheflag.withgoogle.com/" target="_blank" rel="noopener">Google CTF</a>.</p>
 <a id="more"></a>
 <h2 id="Letter"><a href="#Letter" class="headerlink" title="Letter"></a>Letter</h2><p>This is what the first challenge looks like. The username and password are blacked out, but we can still select the text and copy and paste! The flag is CTF{ICanReadDis}.</p>
 <p><img src="/images/googlectf/letter.jpeg" alt=""></p>
@@ -162,10 +170,33 @@
 <p>So lets say V stands for C, M stands for T and Y stands for F. Since this is an email, we can guess that it begins with “Dear xxx”. So we further guess that W stands for D, X stands for E, T stands for A and K stands for R.</p>
 <p>When we write it out, we find that it actually is the Caesar cipher. Here, every letter x is substituted by x + 19. We recover the original flag, which is CTF{caesarcipherisasubstitutioncipher}. (In hindsight, the hint “Caesar once said, don’t stab me…” makes sense!)</p>
 <h2 id="Security-by-obscurity"><a href="#Security-by-obscurity" class="headerlink" title="Security by obscurity"></a>Security by obscurity</h2><h2 id="Floppy"><a href="#Floppy" class="headerlink" title="Floppy"></a>Floppy</h2><p>I was soooo proud when I solved this, even though it is pretty easy, because it is the first challenge I ever solved on my own!</p>
-<p>The attachment is what seems like an icon - but isn’t. When we run binwalk on the icon, we get this: </p>
+<p>The attachment is what seems like an icon - but isn’t. In fact, it contains two zip files. When we run binwalk on the icon, we get this: </p>
 <p><img src="/images/googlectf/floppy.jpeg" alt=""></p>
 <p>Yup, not an innocent image! The flag is CTF{qeY80sU6Ktko8BJW}, as we can see.</p>
-<h2 id="Floppy2"><a href="#Floppy2" class="headerlink" title="Floppy2"></a>Floppy2</h2>
+<h2 id="Floppy2"><a href="#Floppy2" class="headerlink" title="Floppy2"></a>Floppy2</h2><h2 id="JS-SAFE"><a href="#JS-SAFE" class="headerlink" title="JS SAFE"></a>JS SAFE</h2><p>Solved 3/25/2019. Soooo proud again! Though it did take me an ENORMOUS amount of time. Hope I’ll get faster with practice.</p>
+<p><img src="/images/googlectf/js_safe_1.jpeg" alt=""></p>
+<p>So this time we have a safe like this and its corresponding html file. When we enter the password, <code>open_safe()</code> is called, which in turn calls <code>x(password)</code> to check if the password is valid.</p>
+<p><img src="/images/googlectf/js_safe_2.jpeg" alt=""></p>
+<p>Let’s take a look at <code>x(password)</code>.</p>
+<h2 id="Firmware"><a href="#Firmware" class="headerlink" title="Firmware"></a>Firmware</h2><p>Solved 4/12/2019. The attachment is a large file called <code>challenge.ext4</code>. It is likely filesystem data and we should mount it.</p>
+<p>Originally this file was in a shared folder between my host and vm, under <code>/media</code>. When I tried to mount it, I kept getting this error: </p>
+<p><code>mount: /mnt/challenge: can&#39;t read superblock on /dev/loop23.</code></p>
+<p>Moving the file to <code>~/Documents</code> and then mounting it works. I don’t know why. This cost me some time.</p>
+<p>The rest is pretty straightforward: Mount the filesystem (<code>sudo mount ~/Documents/challenge.ext4 /mnt/challenge/</code>), switch to the mount point (<code>cd /mnt/challenge/</code>) and look at the files (<code>ls -al</code>). We see a file <code>.mediapc_backdoor_password.gz</code>. Extracting it gives us <code>.mediapc_backdoor_password</code>, which is a text file storing the flag.</p>
+<h2 id="Gatekeeper"><a href="#Gatekeeper" class="headerlink" title="Gatekeeper"></a>Gatekeeper</h2><p>Solved 4/12/2019. The attachment is an ELF executable. Lets try executing the file:</p>
+<p><img src="/images/googlectf/gatekeeper_1.jpeg" alt=""></p>
+<p>Executing with some random username and password:</p>
+<p><img src="/images/googlectf/gatekeeper_2.jpeg" alt=""></p>
+<p>Lets see if the username and password are stored somewhere in the code! Use <code>strings gatekeeper</code>:</p>
+<p><img src="/images/googlectf/gatekeeper_3.jpeg" alt=""></p>
+<p>Among the output we have these. Jackpot? Lets try.</p>
+<p><img src="/images/googlectf/gatekeeper_4.jpeg" alt=""></p>
+<p>Not quite. But at least we’ve got the username! It’s expected - the stored password would likely be some variant of the actual password, like a hash. But the transformation here should be much simpler than a hash. It’s time to look at the code.</p>
+<p>We can use <code>objdump -d gatekeeper</code> to obtain the assembly code of the object file. I won’t go into the details of analysing the assembly code, but we can find that the input password is REVERSED before being compared to the stored password. So we simply have to reverse the stored password, which gives us “I_g0T_m4d_sk1lLz”.</p>
+<p>Well, I’m sure you do :-)</p>
+<p><img src="/images/googlectf/gatekeeper_5.jpeg" alt=""></p>
+<h2 id="MEDIA-DB"><a href="#MEDIA-DB" class="headerlink" title="MEDIA_DB"></a>MEDIA_DB</h2><p>Solved 4/12/2019. </p>
+
         </div>
         
         <div class="level is-size-7 is-uppercase">
