@@ -2,18 +2,22 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Etiqueta: security - CMouse&#39;s Blog</title>
+<title>Algo final review - NP-complete problems - CMouse&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="CMouse&#39;s Blog">
-<meta property="og:url" content="https://cathymouse96.github.io/tags/security/index.html">
+    <meta name="description" content="Disclaimer: Some sentences are taken from DPV textbook. Problems3SATTraveling Salesman Problem (TSP)Given any instance $(d, b)$, where $d$ is distance matrix and $b$ is budget, find a cycle that passe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Algo final review - NP-complete problems">
+<meta property="og:url" content="https://cathymouse96.github.io/2019/05/12/Algo-final-review-NP-complete-problems/index.html">
 <meta property="og:site_name" content="CMouse&#39;s Blog">
+<meta property="og:description" content="Disclaimer: Some sentences are taken from DPV textbook. Problems3SATTraveling Salesman Problem (TSP)Given any instance $(d, b)$, where $d$ is distance matrix and $b$ is budget, find a cycle that passe">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-12T21:45:00.158Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CMouse&#39;s Blog">
+<meta name="twitter:title" content="Algo final review - NP-complete problems">
+<meta name="twitter:description" content="Disclaimer: Some sentences are taken from DPV textbook. Problems3SATTraveling Salesman Problem (TSP)Given any instance $(d, b)$, where $d$ is distance matrix and $b$ is budget, find a cycle that passe">
 
 
 
@@ -79,7 +83,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="CMouse&#39;s Blog" height="28">
+                <img src="/images/logo.svg" alt="Algo final review - NP-complete problems" height="28">
             
             </a>
         </div>
@@ -116,33 +120,18 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">Etiquetas</a></li>
-            <li class="is-active"><a href="#" aria-current="page">security</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-24T21:17:31.000Z">2019-03-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/CTF/">CTF</a>
-                </div>
+                <time class="level-item has-text-grey" datetime="2019-05-12T21:00:48.000Z">2019-05-12</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes read (About 865 words)
+                    3 minutes read (About 406 words)
                 </span>
                 
             </div>
@@ -150,30 +139,53 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/03/24/Google-CTF-Beginners-Quest-Notes/">Google CTF Beginners Quest Notes</a>
+                Algo final review - NP-complete problems
             
         </h1>
         <div class="content">
-            <p>This is my first attempt at CTF and I’m stumbling along with the help of walkthroughs on Google :-) I’m posting my notes as I learn.</p>
-<p>SPOILERS ALERT! Do not keep reading if you want to solve the problems on your own.</p>
-<p>Link to <a href="https://capturetheflag.withgoogle.com/" target="_blank" rel="noopener">Google CTF</a>.</p>
+            <p><strong>Disclaimer:</strong> Some sentences are taken from DPV textbook.</p>
+<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><h3 id="3SAT"><a href="#3SAT" class="headerlink" title="3SAT"></a>3SAT</h3><h3 id="Traveling-Salesman-Problem-TSP"><a href="#Traveling-Salesman-Problem-TSP" class="headerlink" title="Traveling Salesman Problem (TSP)"></a>Traveling Salesman Problem (TSP)</h3><p>Given any instance $(d, b)$, where $d$ is distance matrix and $b$ is budget, find a cycle that passes through each vertex exactly once, of total cost $b$ or less.</p>
+<p><u>TSP is essentially min weight Rudrata Cycle.</u></p>
+<a id="more"></a>
+<h3 id="Rudrata-Path"><a href="#Rudrata-Path" class="headerlink" title="Rudrata Path"></a>Rudrata Path</h3><p>Given any instance $(G=(V, E))$, where $G$ is undirected, find a path that visits each vertex exactly once.</p>
+<p><u>In contrast, the Euler Path problem (traverse each edge exactly once) can be solved in polynomial time.</u></p>
+<h3 id="Longest-Path"><a href="#Longest-Path" class="headerlink" title="Longest Path"></a>Longest Path</h3><p>Given any instance $(G=(V, E, w), s, t, g)$, where edge weights $w$ are nonnegative, find a simple (no repeated vertices) path from $s$ to $t$ with total weight at least $g$.</p>
+<h3 id="3D-Matching"><a href="#3D-Matching" class="headerlink" title="3D Matching"></a>3D Matching</h3><p>Given any instance $(m \text{ boys}, m \text{ girls}, m \text{ pets}, n \text{ triples})$, find $m$ disjoint triples.</p>
+<h3 id="Knapsack"><a href="#Knapsack" class="headerlink" title="Knapsack"></a>Knapsack</h3><h3 id="Independent-Set"><a href="#Independent-Set" class="headerlink" title="Independent Set"></a>Independent Set</h3><p>Given any instance $(G=(V, E), g)$, find $g$ vertices that are independent, that is, no two of which have an edge between them.</p>
+<h3 id="Vertex-Cover"><a href="#Vertex-Cover" class="headerlink" title="Vertex Cover"></a>Vertex Cover</h3><p>Given any instance $(G=(V, E), b)$, find $b$ vertices that cover (touch) every edge.</p>
+<p><u>Special case of Set Cover.</u></p>
+<h3 id="Set-Cover"><a href="#Set-Cover" class="headerlink" title="Set Cover"></a>Set Cover</h3><p>Given any instance $(E, S_1, …, S_m, b)$, find $b$ subsets such that their union is $E$.</p>
+<h3 id="Clique"><a href="#Clique" class="headerlink" title="Clique"></a>Clique</h3><p>Given any instance $(G=(V, E), g)$, find $g$ vertices such that all possible edges between them are present.</p>
+<h3 id="Integer-Linear-Programming-ILP"><a href="#Integer-Linear-Programming-ILP" class="headerlink" title="Integer Linear Programming (ILP)"></a>Integer Linear Programming (ILP)</h3><p>Given any instance $(A, b)$, find a <strong>nonnegative</strong> integer vector $x$ satisfying the inequalities $Ax\leq b$.</p>
+<h3 id="Zero-One-Equations-ZOE"><a href="#Zero-One-Equations-ZOE" class="headerlink" title="Zero-One Equations (ZOE)"></a>Zero-One Equations (ZOE)</h3><p>Given any instance $(A)$, where $A$ is an $m$ x $n$ matrix with 0 - 1 entries, find a 0 - 1 vector $x$ such that the $m$ equations $Ax=1$.</p>
+<h3 id="Balanced-Cut"><a href="#Balanced-Cut" class="headerlink" title="Balanced Cut"></a>Balanced Cut</h3><h2 id="Reductions"><a href="#Reductions" class="headerlink" title="Reductions"></a>Reductions</h2><h3 id="Independent-Set-gt-Vertex-Cover"><a href="#Independent-Set-gt-Vertex-Cover" class="headerlink" title="Independent Set -&gt; Vertex Cover"></a>Independent Set -&gt; Vertex Cover</h3><p>The reduction maps an instance $(G=(V, E), g)$ of Independent Set to an instance $(G’=(V’, E’), b)$ of Vertex Cover as follows: $G’$ is simply $G$, and $b=|V|-g$.</p>
+<p>To recover a satisfying assignment of Independent Set, we simply return the vertices that are <strong>not</strong> in the Vertex Cover.</p>
+<p><u>Works the other way too.</u></p>
+<h3 id="Independent-Set-gt-Clique"><a href="#Independent-Set-gt-Clique" class="headerlink" title="Independent Set -&gt; Clique"></a>Independent Set -&gt; Clique</h3><p>The reduction maps an instance $(G=(V, E), g)$ of Independent Set to an instance $(G’=(V’, E’), g’)$ of Clique as follows: $G’$ is the complement of $G$, and $g’=g$.</p>
+<p>To recover a satisfying assignment of Independent Set, we simply return the vertices that are in the Clique.</p>
+<p><u>Works the other way too.</u></p>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/03/24/Google-CTF-Beginners-Quest-Notes/#more">Read More</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
 </div>
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/03/24/Google-CTF-Beginners-Quest-Notes/">
+                <span class="level-item">Google CTF Beginners Quest Notes</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -513,7 +525,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="CMouse&#39;s Blog" height="28">
+                    <img src="/images/logo.svg" alt="Algo final review - NP-complete problems" height="28">
                 
                 </a>
                 <p class="is-size-7">
