@@ -7,17 +7,17 @@
 
 
 
-    <meta name="description" content="Disclaimer: Some sentences are taken from DPV textbook. Problems3SATTraveling Salesman Problem (TSP)Given any instance $(d, b)$, where $d$ is distance matrix and $b$ is budget, find a cycle that passe">
+    <meta name="description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. Problems3SAT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Algo final review - NP-complete problems">
 <meta property="og:url" content="https://cathymouse96.github.io/2019/05/12/Algo-final-review-NP-complete-problems/index.html">
 <meta property="og:site_name" content="CMouse&#39;s Blog">
-<meta property="og:description" content="Disclaimer: Some sentences are taken from DPV textbook. Problems3SATTraveling Salesman Problem (TSP)Given any instance $(d, b)$, where $d$ is distance matrix and $b$ is budget, find a cycle that passe">
+<meta property="og:description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. Problems3SAT">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-12T21:45:00.158Z">
+<meta property="og:updated_time" content="2019-05-12T22:36:35.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algo final review - NP-complete problems">
-<meta name="twitter:description" content="Disclaimer: Some sentences are taken from DPV textbook. Problems3SATTraveling Salesman Problem (TSP)Given any instance $(d, b)$, where $d$ is distance matrix and $b$ is budget, find a cycle that passe">
+<meta name="twitter:description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. Problems3SAT">
 
 
 
@@ -131,7 +131,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 minutes read (About 406 words)
+                    5 minutes read (About 709 words)
                 </span>
                 
             </div>
@@ -143,12 +143,14 @@
             
         </h1>
         <div class="content">
-            <p><strong>Disclaimer:</strong> Some sentences are taken from DPV textbook.</p>
-<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><h3 id="3SAT"><a href="#3SAT" class="headerlink" title="3SAT"></a>3SAT</h3><h3 id="Traveling-Salesman-Problem-TSP"><a href="#Traveling-Salesman-Problem-TSP" class="headerlink" title="Traveling Salesman Problem (TSP)"></a>Traveling Salesman Problem (TSP)</h3><p>Given any instance $(d, b)$, where $d$ is distance matrix and $b$ is budget, find a cycle that passes through each vertex exactly once, of total cost $b$ or less.</p>
-<p><u>TSP is essentially min weight Rudrata Cycle.</u></p>
-<a id="more"></a>
+            <p>By CMouse, May 2019.</p>
+<p><strong>Disclaimer:</strong> Some sentences are taken from DPV textbook.</p>
+<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><h3 id="3SAT"><a href="#3SAT" class="headerlink" title="3SAT"></a>3SAT</h3><a id="more"></a>
 <h3 id="Rudrata-Path"><a href="#Rudrata-Path" class="headerlink" title="Rudrata Path"></a>Rudrata Path</h3><p>Given any instance $(G=(V, E))$, where $G$ is undirected, find a path that visits each vertex exactly once.</p>
 <p><u>In contrast, the Euler Path problem (traverse each edge exactly once) can be solved in polynomial time.</u></p>
+<h3 id="Rudrata-Cycle"><a href="#Rudrata-Cycle" class="headerlink" title="Rudrata Cycle"></a>Rudrata Cycle</h3><p>Given any instance $(G=(V, E))$, where $G$ is undirected, find a cycle that visits each vertex exactly once.</p>
+<h3 id="Traveling-Salesman-Problem-TSP"><a href="#Traveling-Salesman-Problem-TSP" class="headerlink" title="Traveling Salesman Problem (TSP)"></a>Traveling Salesman Problem (TSP)</h3><p>Given any instance $(d, b)$, where $d$ is distance matrix and $b$ is budget, find a cycle that passes through each vertex exactly once, of total cost $b$ or less.</p>
+<p><u>TSP is essentially min weight Rudrata Cycle.</u></p>
 <h3 id="Longest-Path"><a href="#Longest-Path" class="headerlink" title="Longest Path"></a>Longest Path</h3><p>Given any instance $(G=(V, E, w), s, t, g)$, where edge weights $w$ are nonnegative, find a simple (no repeated vertices) path from $s$ to $t$ with total weight at least $g$.</p>
 <h3 id="3D-Matching"><a href="#3D-Matching" class="headerlink" title="3D Matching"></a>3D Matching</h3><p>Given any instance $(m \text{ boys}, m \text{ girls}, m \text{ pets}, n \text{ triples})$, find $m$ disjoint triples.</p>
 <h3 id="Knapsack"><a href="#Knapsack" class="headerlink" title="Knapsack"></a>Knapsack</h3><h3 id="Independent-Set"><a href="#Independent-Set" class="headerlink" title="Independent Set"></a>Independent Set</h3><p>Given any instance $(G=(V, E), g)$, find $g$ vertices that are independent, that is, no two of which have an edge between them.</p>
@@ -158,13 +160,21 @@
 <h3 id="Clique"><a href="#Clique" class="headerlink" title="Clique"></a>Clique</h3><p>Given any instance $(G=(V, E), g)$, find $g$ vertices such that all possible edges between them are present.</p>
 <h3 id="Integer-Linear-Programming-ILP"><a href="#Integer-Linear-Programming-ILP" class="headerlink" title="Integer Linear Programming (ILP)"></a>Integer Linear Programming (ILP)</h3><p>Given any instance $(A, b)$, find a <strong>nonnegative</strong> integer vector $x$ satisfying the inequalities $Ax\leq b$.</p>
 <h3 id="Zero-One-Equations-ZOE"><a href="#Zero-One-Equations-ZOE" class="headerlink" title="Zero-One Equations (ZOE)"></a>Zero-One Equations (ZOE)</h3><p>Given any instance $(A)$, where $A$ is an $m$ x $n$ matrix with 0 - 1 entries, find a 0 - 1 vector $x$ such that the $m$ equations $Ax=1$.</p>
-<h3 id="Balanced-Cut"><a href="#Balanced-Cut" class="headerlink" title="Balanced Cut"></a>Balanced Cut</h3><h2 id="Reductions"><a href="#Reductions" class="headerlink" title="Reductions"></a>Reductions</h2><h3 id="Independent-Set-gt-Vertex-Cover"><a href="#Independent-Set-gt-Vertex-Cover" class="headerlink" title="Independent Set -&gt; Vertex Cover"></a>Independent Set -&gt; Vertex Cover</h3><p>The reduction maps an instance $(G=(V, E), g)$ of Independent Set to an instance $(G’=(V’, E’), b)$ of Vertex Cover as follows: $G’$ is simply $G$, and $b=|V|-g$.</p>
-<p>To recover a satisfying assignment of Independent Set, we simply return the vertices that are <strong>not</strong> in the Vertex Cover.</p>
+<h3 id="Balanced-Cut"><a href="#Balanced-Cut" class="headerlink" title="Balanced Cut"></a>Balanced Cut</h3><h2 id="Reductions"><a href="#Reductions" class="headerlink" title="Reductions"></a>Reductions</h2><h3 id="Rudrata-s-t-Path-gt-Rudrata-Cycle"><a href="#Rudrata-s-t-Path-gt-Rudrata-Cycle" class="headerlink" title="Rudrata (s, t)-Path -&gt; Rudrata Cycle"></a>Rudrata (s, t)-Path -&gt; Rudrata Cycle</h3><p>The reduction maps an instance $(G=(V, E), s, t)$ of Rudrata $(s, t)$-path to an instance $(G’=(V, E))$ of Rudrata Cycle as follows: add a dummy node $a$, and add edges $(t, a)$ and $(a, s)$.</p>
+<p>To recover a solution of Rudrata $(s, t)$-path, we simply remove the edges $(t, a)$ and $(a, s)$ from the Rudrata Cycle.</p>
+<h3 id="Rudrata-Cycle-gt-TSP"><a href="#Rudrata-Cycle-gt-TSP" class="headerlink" title="Rudrata Cycle -&gt; TSP"></a>Rudrata Cycle -&gt; TSP</h3><p>The reduction maps an instance $(G’=(V, E))$ of Rudrata Cycle to an instance $(d, b)$ of TSP as follows: for each pair of vertices $(i, j)$, $d_{ij}=1$ if there is an edge between them, and $1+\alpha$ (where $\alpha &gt; 0$) otherwise, and $b=|V|$.</p>
+<p>To recover a solution of Rudrata Cycle, we simply return the solution of TSP.</p>
+<h3 id="Independent-Set-gt-Vertex-Cover"><a href="#Independent-Set-gt-Vertex-Cover" class="headerlink" title="Independent Set -&gt; Vertex Cover"></a>Independent Set -&gt; Vertex Cover</h3><p>The reduction maps an instance $(G=(V, E), g)$ of Independent Set to an instance $(G’=(V’, E’), b)$ of Vertex Cover as follows: $G’$ is simply $G$, and $b=|V|-g$.</p>
+<p>To recover a solution of Independent Set, we simply return the vertices that are <strong>not</strong> in the Vertex Cover.</p>
 <p><u>Works the other way too.</u></p>
 <h3 id="Independent-Set-gt-Clique"><a href="#Independent-Set-gt-Clique" class="headerlink" title="Independent Set -&gt; Clique"></a>Independent Set -&gt; Clique</h3><p>The reduction maps an instance $(G=(V, E), g)$ of Independent Set to an instance $(G’=(V’, E’), g’)$ of Clique as follows: $G’$ is the complement of $G$, and $g’=g$.</p>
-<p>To recover a satisfying assignment of Independent Set, we simply return the vertices that are in the Clique.</p>
+<p>To recover a solution of Independent Set, we simply return the vertices that are in the Clique.</p>
 <p><u>Works the other way too.</u></p>
-
+<h3 id="3D-Matching-gt-ZOE"><a href="#3D-Matching-gt-ZOE" class="headerlink" title="3D Matching -&gt; ZOE"></a>3D Matching -&gt; ZOE</h3><p>The reduction maps an instance $(m \text{ boys}, m \text{ girls}, m \text{ pets}, n \text{ triples})$ of 3D Matching to an instance $(A)$ of ZOE as follows: $A$ has $3m$ rows and $n$ columns, and the $(i, j)$th element is $1$ if the $i$th boy/girl/pet is in the $j$th triple, and $0$ otherwise.</p>
+<p>To recover a solution of 3D Matching, we select the triples whose corresponding variables are assigned to be $1$.</p>
+<h3 id="ZOE-gt-ILP"><a href="#ZOE-gt-ILP" class="headerlink" title="ZOE -&gt; ILP"></a>ZOE -&gt; ILP</h3><p>The reduction maps an instance $(A)$ of ZOE to an instance $(A’, b)$ of ILP as follows: rewrite every equation $ax=1$ as two inequalities $ax\leq 1$ and $-ax\leq -1$, and for each variable $x_i$, add two constraints $x_i\leq 1$ and $-x_i\leq 0$.</p>
+<p>To recover a solution of ZOE, we simply return the solution of ILP.</p>
+<h3 id="ZOE-gt-Subset-Sum"><a href="#ZOE-gt-Subset-Sum" class="headerlink" title="ZOE -&gt; Subset Sum"></a>ZOE -&gt; Subset Sum</h3><h3 id="ZOE-gt-Rudrata-Cycle"><a href="#ZOE-gt-Rudrata-Cycle" class="headerlink" title="ZOE -&gt; Rudrata Cycle"></a>ZOE -&gt; Rudrata Cycle</h3><h3 id="3SAT-gt-Independent-Set"><a href="#3SAT-gt-Independent-Set" class="headerlink" title="3SAT -&gt; Independent Set"></a>3SAT -&gt; Independent Set</h3><h3 id="SAT-gt-3SAT"><a href="#SAT-gt-3SAT" class="headerlink" title="SAT -&gt; 3SAT"></a>SAT -&gt; 3SAT</h3><h3 id="3SAT-gt-3D-Matching"><a href="#3SAT-gt-3D-Matching" class="headerlink" title="3SAT -&gt; 3D Matching"></a>3SAT -&gt; 3D Matching</h3>
         </div>
         
         
