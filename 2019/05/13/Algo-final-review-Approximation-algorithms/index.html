@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="CMouse&#39;s Blog">
 <meta property="og:description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. OverviewHierarchy:  No finite approximation ratio possible (e.g. General TSP). Approximation ratio about $logn$ (e.g. Set C">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-13T17:50:17.662Z">
+<meta property="og:updated_time" content="2019-05-13T23:25:52.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algo final review - Approximation algorithms">
 <meta name="twitter:description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. OverviewHierarchy:  No finite approximation ratio possible (e.g. General TSP). Approximation ratio about $logn$ (e.g. Set C">
@@ -132,7 +132,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 346 words)
+                    3 minutes read (About 509 words)
                 </span>
                 
             </div>
@@ -154,7 +154,15 @@
 <li>Approximability has no limits (e.g. Knapsack).</li>
 </ul>
 <a id="more"></a>
-<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><h3 id="Set-Cover"><a href="#Set-Cover" class="headerlink" title="Set Cover"></a>Set Cover</h3><h3 id="Vertex-Cover"><a href="#Vertex-Cover" class="headerlink" title="Vertex Cover"></a>Vertex Cover</h3><p><strong>Algorithm:</strong> </p>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><h3 id="Set-Cover"><a href="#Set-Cover" class="headerlink" title="Set Cover"></a>Set Cover</h3><p><strong>Algorithm:</strong></p>
+<ol>
+<li>Pick the set $S_i$ with the largest number of uncovered elements.</li>
+<li>Repeat until all elements of $E$ are covered.</li>
+</ol>
+<p><strong>Approximation ratio:</strong> $\alpha_A=logn$, where $n$ is the number of elements in $E$.</p>
+<p><strong>Reasoning:</strong> Let $n_t$ be the number of elements uncovered after $t$ iterations. Suppose the optimal number of sets is $k$, the set with the largest number of uncovered elements will cover at least $n_t/k$ of them. Therefore, the greedy strategy will ensure that $n_{t+1}\leq n_t - \frac{n_t}{k}=n_k(1-\frac{1}{k})$, which by repeated application implies $n_t\leq n_0(1-\frac{1}{k})^t$.</p>
+<p>Since $1-x\leq e^{-x}$, with equality if and only if $x=0$, $n_t&lt; n_0 e^{-t/k}=n e^{-t/k}$. When $t=klnn$, $n_t$ is strictly less than $1$, so all the elements are covered. Therefore, the greedy solution takes at most $klnn$ sets.</p>
+<h3 id="Vertex-Cover"><a href="#Vertex-Cover" class="headerlink" title="Vertex Cover"></a>Vertex Cover</h3><p><strong>Algorithm:</strong> </p>
 <ol>
 <li><p>Find a maximal matching.</p>
 </li>
@@ -176,7 +184,8 @@
 <h3 id="TSP-with-triangle-inequality"><a href="#TSP-with-triangle-inequality" class="headerlink" title="TSP with triangle inequality"></a>TSP with triangle inequality</h3><p><strong>Algorithm:</strong></p>
 <p><strong>Approximation ratio:</strong> </p>
 <p><strong>Reasoning:</strong> </p>
-<h3 id="Knapsack"><a href="#Knapsack" class="headerlink" title="Knapsack"></a>Knapsack</h3><h2 id="Additional-Exercises"><a href="#Additional-Exercises" class="headerlink" title="Additional Exercises"></a>Additional Exercises</h2><h3 id="DPV-9-4-Independent-Set"><a href="#DPV-9-4-Independent-Set" class="headerlink" title="DPV 9.4 Independent Set"></a>DPV 9.4 Independent Set</h3><p><strong>Algorithm:</strong></p>
+<h3 id="Knapsack"><a href="#Knapsack" class="headerlink" title="Knapsack"></a>Knapsack</h3><p>Approximation ratio: $\alpha_A=1- \epsilon$, where $\epsilon$ can be arbitrarily small.</p>
+<h2 id="Additional-Exercises"><a href="#Additional-Exercises" class="headerlink" title="Additional Exercises"></a>Additional Exercises</h2><h3 id="DPV-9-4-Independent-Set"><a href="#DPV-9-4-Independent-Set" class="headerlink" title="DPV 9.4 Independent Set"></a>DPV 9.4 Independent Set</h3><p><strong>Algorithm:</strong></p>
 <ol>
 <li>Choose any node and add it to the independent set.</li>
 <li>Delete the node and its neighbors from the graph.</li>
