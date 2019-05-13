@@ -7,17 +7,18 @@
 
 
 
-    <meta name="description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. ProblemsSATGiven any instance $I$, which is a Boolean formula in conjunctive normal form, find an assignment that satisfies">
+    <meta name="description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. ProblemsSATGiven any instance $(I)$, which is a Boolean formula in conjunctive normal form, find an assignment that satisfi">
+<meta name="keywords" content="algorithms,computer theory">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Algo final review - NP-complete problems">
 <meta property="og:url" content="https://cathymouse96.github.io/2019/05/12/Algo-final-review-NP-complete-problems/index.html">
 <meta property="og:site_name" content="CMouse&#39;s Blog">
-<meta property="og:description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. ProblemsSATGiven any instance $I$, which is a Boolean formula in conjunctive normal form, find an assignment that satisfies">
+<meta property="og:description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. ProblemsSATGiven any instance $(I)$, which is a Boolean formula in conjunctive normal form, find an assignment that satisfi">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-13T01:16:36.505Z">
+<meta property="og:updated_time" content="2019-05-13T03:06:41.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algo final review - NP-complete problems">
-<meta name="twitter:description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. ProblemsSATGiven any instance $I$, which is a Boolean formula in conjunctive normal form, find an assignment that satisfies">
+<meta name="twitter:description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. ProblemsSATGiven any instance $(I)$, which is a Boolean formula in conjunctive normal form, find an assignment that satisfi">
 
 
 
@@ -131,7 +132,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes read (About 951 words)
+                    9 minutes read (About 1293 words)
                 </span>
                 
             </div>
@@ -145,8 +146,8 @@
         <div class="content">
             <p>By CMouse, May 2019.</p>
 <p><strong>Disclaimer:</strong> Some sentences are taken from DPV textbook.</p>
-<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><h3 id="SAT"><a href="#SAT" class="headerlink" title="SAT"></a>SAT</h3><p>Given any instance $I$, which is a Boolean formula in conjunctive normal form, find an assignment that satisfies each clause.</p>
-<h3 id="3SAT"><a href="#3SAT" class="headerlink" title="3SAT"></a>3SAT</h3><p>Given any instance $I$, which is a Boolean formula in conjunctive normal form and each clause contains at most three literals, find an assignment that satisfies each clause.</p>
+<h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><h3 id="SAT"><a href="#SAT" class="headerlink" title="SAT"></a>SAT</h3><p>Given any instance $(I)$, which is a Boolean formula in conjunctive normal form, find an assignment that satisfies each clause.</p>
+<h3 id="3SAT"><a href="#3SAT" class="headerlink" title="3SAT"></a>3SAT</h3><p>Given any instance $(I)$, which is a Boolean formula in conjunctive normal form and each clause contains at most three literals, find an assignment that satisfies each clause.</p>
 <p><u>Special case of SAT.</u></p>
 <a id="more"></a>
 <h3 id="Rudrata-Path"><a href="#Rudrata-Path" class="headerlink" title="Rudrata Path"></a>Rudrata Path</h3><p>Given any instance $(G=(V, E))$, where $G$ is undirected, find a path that visits each vertex exactly once.</p>
@@ -184,7 +185,26 @@
 <p>To recover a solution of ZOE, we simply return the solution of ILP.</p>
 <h3 id="ZOE-gt-Subset-Sum"><a href="#ZOE-gt-Subset-Sum" class="headerlink" title="ZOE -&gt; Subset Sum"></a>ZOE -&gt; Subset Sum</h3><p>The reduction maps an instance $(A)$ of ZOE to an instance $(w_1, …, w_n, W)$ of Subset Sum as follows: $w_i$ is the integer encoded by the $i$th column in $(n+1)$-ary, and $W=(n+1)^m-1$, where $m$ is the number of rows and $n$ is the number of columns.</p>
 <p>To recover a solution of ZOE, we assign the variables that are in the subset to be $1$ and the others to be $0$.</p>
-<h3 id="ZOE-gt-Rudrata-Cycle"><a href="#ZOE-gt-Rudrata-Cycle" class="headerlink" title="ZOE -&gt; Rudrata Cycle"></a>ZOE -&gt; Rudrata Cycle</h3><h3 id="3SAT-gt-Independent-Set"><a href="#3SAT-gt-Independent-Set" class="headerlink" title="3SAT -&gt; Independent Set"></a>3SAT -&gt; Independent Set</h3><h3 id="SAT-gt-3SAT"><a href="#SAT-gt-3SAT" class="headerlink" title="SAT -&gt; 3SAT"></a>SAT -&gt; 3SAT</h3><h3 id="3SAT-gt-3D-Matching"><a href="#3SAT-gt-3D-Matching" class="headerlink" title="3SAT -&gt; 3D Matching"></a>3SAT -&gt; 3D Matching</h3>
+<h3 id="ZOE-gt-Rudrata-Cycle"><a href="#ZOE-gt-Rudrata-Cycle" class="headerlink" title="ZOE -&gt; Rudrata Cycle"></a>ZOE -&gt; Rudrata Cycle</h3><h3 id="3SAT-gt-Independent-Set"><a href="#3SAT-gt-Independent-Set" class="headerlink" title="3SAT -&gt; Independent Set"></a>3SAT -&gt; Independent Set</h3><p>The reduction maps an instance $(I)$ of 3SAT to an instance $(G=(V, E), g)$ of Independent Set as follows: $V$ consists of all the variables and their negations, and there are edges between literals in the same clause, as well as variables and their negations, and $g$ is equal to the number of clauses.</p>
+<p>To recover an assignment of 3SAT, we assign <code>true</code> to the variables that are in the independent set, <code>false</code> to the variables whose negations are in the independent set, and either <code>true</code> or <code>false</code> otherwise.</p>
+<h3 id="SAT-gt-3SAT"><a href="#SAT-gt-3SAT" class="headerlink" title="SAT -&gt; 3SAT"></a>SAT -&gt; 3SAT</h3><p>The reduction maps an instance $(I)$ of SAT to an instance $(I’)$ of 3SAT as follows: for any clause that has more than three literals in $I$, say $(a_1\vee a_2 \vee…\vee a_n)$, change it to $(a_1\vee a_2\vee y_1)\wedge (\bar{y_1}\vee a_3\vee y_2)\wedge … \wedge (\bar{y_{n-3}}\vee a_{n-1}\vee a_n)$.</p>
+<p>To recover an assignment of SAT, we simply return the assignment of 3SAT without the added variables.</p>
+<h3 id="3SAT-gt-Constrained-3SAT"><a href="#3SAT-gt-Constrained-3SAT" class="headerlink" title="3SAT -&gt; Constrained 3SAT"></a>3SAT -&gt; Constrained 3SAT</h3><p>Constrained 3SAT: No variable appears in more than three clauses.</p>
+<p>The reduction maps an instance $(I)$ of SAT to an instance $(I’)$ of 3SAT as follows: for any variable $x$ that appears in more than three clauses, replace its first appearance with $x_1$, second appearance with $x_2$, …, $k$th appearance with $x_k$ and add the clauses $(x_1\vee \bar{x_2})\wedge (x_2\vee \bar{x_3})\wedge … \wedge (x_n\vee \bar{x_1})$.</p>
+<p>To recover an assignment of 3SAT, we simply return the assignment of Constrained 3SAT with the added variables mapped back to the original variables.</p>
+<h3 id="3SAT-gt-3D-Matching"><a href="#3SAT-gt-3D-Matching" class="headerlink" title="3SAT -&gt; 3D Matching"></a>3SAT -&gt; 3D Matching</h3><h3 id="Any-problem-in-NP-gt-SAT"><a href="#Any-problem-in-NP-gt-SAT" class="headerlink" title="Any problem in NP -&gt; SAT"></a>Any problem in NP -&gt; SAT</h3><h2 id="Additional-Exercises"><a href="#Additional-Exercises" class="headerlink" title="Additional Exercises"></a>Additional Exercises</h2><h3 id="DPV-8-15-Maximum-Common-Subgraph"><a href="#DPV-8-15-Maximum-Common-Subgraph" class="headerlink" title="DPV 8.15 Maximum Common Subgraph"></a>DPV 8.15 Maximum Common Subgraph</h3><p>Idea: prove by generalization (Clique -&gt; Maximum Common Subgraph).</p>
+<p>The reduction maps an instance $(G=(V, E), g)$ of Clique to an instance $(G_1=(V_1, E_1), G_2=(V_2, E_2), b)$ as follows: $G_1$ is simply $G$, $G_2$ is a complete graph with $g$ nodes, i.e. $K_g$, and $b=g$.</p>
+<p>To recover a solution of Clique, return $V_1-V_1’$.</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/algorithms/">algorithms</a>, <a class="has-link-grey -link" href="/tags/computer-theory/">computer theory</a>
+                </div>
+            </div>
         </div>
         
         
@@ -195,6 +215,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/13/Algo-final-review-Approximation-algorithms/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Algo final review - Approximation algorithms</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -245,17 +272,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Entradas
+                        Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        5
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categorias
+                        Categories
                     </p>
                     <p class="title has-text-weight-normal">
                         2
@@ -265,17 +292,17 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Etiquetas
+                        Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        3
+                        5
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/CathyMouse96">
-                SEGUIR</a>
+                Follow</a>
         </div>
         
         
@@ -311,7 +338,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categorias
+                Categories
             </h3>
             <ul class="menu-list">
             <li>
@@ -343,7 +370,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
         
@@ -353,7 +380,7 @@
                     <span class="level-item">May 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -389,7 +416,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <ul class="menu-list">
                 
@@ -408,6 +435,28 @@
                     <a class="level is-marginless" href="/tags/Python-3/">
                         <span class="level-start">
                             <span class="level-item">Python 3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/algorithms/">
+                        <span class="level-start">
+                            <span class="level-item">algorithms</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/computer-theory/">
+                        <span class="level-start">
+                            <span class="level-item">computer theory</span>
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">1</span>
@@ -445,7 +494,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
         
@@ -455,7 +504,7 @@
                     <span class="level-item">May 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -491,7 +540,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <ul class="menu-list">
                 
@@ -510,6 +559,28 @@
                     <a class="level is-marginless" href="/tags/Python-3/">
                         <span class="level-start">
                             <span class="level-item">Python 3</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/algorithms/">
+                        <span class="level-start">
+                            <span class="level-item">algorithms</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/computer-theory/">
+                        <span class="level-start">
+                            <span class="level-item">computer theory</span>
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">1</span>
@@ -652,10 +723,10 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Entradas',
+                POSTS: 'Posts',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categorias',
-                TAGS: 'Etiquetas',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

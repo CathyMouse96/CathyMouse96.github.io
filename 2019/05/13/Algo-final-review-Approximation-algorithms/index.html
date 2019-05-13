@@ -2,18 +2,23 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Tag: Google CTF - CMouse&#39;s Blog</title>
+<title>Algo final review - Approximation algorithms - CMouse&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="CMouse&#39;s Blog">
-<meta property="og:url" content="https://cathymouse96.github.io/tags/Google-CTF/index.html">
+    <meta name="description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. OverviewHierarchy:  No finite approximation ratio possible (e.g. General TSP). Approximation ratio about $logn$ (e.g. Set C">
+<meta name="keywords" content="algorithms">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Algo final review - Approximation algorithms">
+<meta property="og:url" content="https://cathymouse96.github.io/2019/05/13/Algo-final-review-Approximation-algorithms/index.html">
 <meta property="og:site_name" content="CMouse&#39;s Blog">
+<meta property="og:description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. OverviewHierarchy:  No finite approximation ratio possible (e.g. General TSP). Approximation ratio about $logn$ (e.g. Set C">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-13T17:46:44.291Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CMouse&#39;s Blog">
+<meta name="twitter:title" content="Algo final review - Approximation algorithms">
+<meta name="twitter:description" content="By CMouse, May 2019. Disclaimer: Some sentences are taken from DPV textbook. OverviewHierarchy:  No finite approximation ratio possible (e.g. General TSP). Approximation ratio about $logn$ (e.g. Set C">
 
 
 
@@ -79,7 +84,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="CMouse&#39;s Blog" height="28">
+                <img src="/images/logo.svg" alt="Algo final review - Approximation algorithms" height="28">
             
             </a>
         </div>
@@ -116,33 +121,18 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">Tags</a></li>
-            <li class="is-active"><a href="#" aria-current="page">Google CTF</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-24T21:17:31.000Z">2019-03-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/CTF/">CTF</a>
-                </div>
+                <time class="level-item has-text-grey" datetime="2019-05-13T16:50:23.000Z">2019-05-13</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes read (About 865 words)
+                    2 minutes read (About 345 words)
                 </span>
                 
             </div>
@@ -150,30 +140,80 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/03/24/Google-CTF-Beginners-Quest-Notes/">Google CTF Beginners Quest Notes</a>
+                Algo final review - Approximation algorithms
             
         </h1>
         <div class="content">
-            <p>This is my first attempt at CTF and I’m stumbling along with the help of walkthroughs on Google :-) I’m posting my notes as I learn.</p>
-<p>SPOILERS ALERT! Do not keep reading if you want to solve the problems on your own.</p>
-<p>Link to <a href="https://capturetheflag.withgoogle.com/" target="_blank" rel="noopener">Google CTF</a>.</p>
+            <p>By CMouse, May 2019.</p>
+<p><strong>Disclaimer:</strong> Some sentences are taken from DPV textbook.</p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><strong>Hierarchy:</strong></p>
+<ul>
+<li>No finite approximation ratio possible (e.g. General TSP).</li>
+<li>Approximation ratio about $logn$ (e.g. Set Cover).</li>
+<li>Approximation ratio is possible, but there are limits to how small it can be (e.g. Vertex Cover, $k$-Cluster, TSP with triangle inequality).</li>
+<li>Approximability has no limits (e.g. Knapsack).</li>
+</ul>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><h3 id="Set-Cover"><a href="#Set-Cover" class="headerlink" title="Set Cover"></a>Set Cover</h3><h3 id="Vertex-Cover"><a href="#Vertex-Cover" class="headerlink" title="Vertex Cover"></a>Vertex Cover</h3><p><strong>Algorithm:</strong> </p>
+<ol>
+<li><p>Find a maximal matching.</p>
+</li>
+<li><p>Add both endpoints of the edges in the matching to the vertex cover.</p>
+</li>
+</ol>
+<p><strong>Approximation ratio:</strong> $\alpha_A = 2$.</p>
+<p><strong>Reasoning:</strong> Optimal vertex cover has size at least that of maximal matching. Adding both endpoints of all the edges in the matching is guaranteed to form a vertex cover.</p>
+<p><u>Matching: a subset of edges that have no vertices in common.</u></p>
+<p><u>Maximal matching: a matching that cannot have any more edges added to it; can be generated by repeatedly adding edges until no longer possible.</u></p>
+<p><u>Maximum matching: a matching that contains the largest possible number of edges.</u></p>
+<h3 id="k-Cluster"><a href="#k-Cluster" class="headerlink" title="k-Cluster"></a>k-Cluster</h3><p><strong>Algorithm:</strong></p>
+<ol>
+<li>Randomly pick first cluster center $\mu_1$.</li>
+<li>Repeatedly pick clusters centers $\mu_2, \mu_3, …, \mu_k$ such that $\mu_i$ is always the farthest possible point away from $\mu_1, …, \mu_{i-1}$.</li>
+</ol>
+<p><strong>Approximation ratio:</strong> $\alpha_A=2$.</p>
+<p><strong>Reasoning:</strong> If pick another cluster center $\mu_{k+1}$ which has distance $r$ to previous cluster centers, can show that optimal cluster diameter is at least $r$, and current cluster diameter is at most $2r$.</p>
+<h3 id="TSP-with-triangle-inequality"><a href="#TSP-with-triangle-inequality" class="headerlink" title="TSP with triangle inequality"></a>TSP with triangle inequality</h3><p><strong>Algorithm:</strong></p>
+<p><strong>Approximation ratio:</strong> </p>
+<p><strong>Reasoning:</strong> </p>
+<h3 id="Knapsack"><a href="#Knapsack" class="headerlink" title="Knapsack"></a>Knapsack</h3><h2 id="Additional-Exercises"><a href="#Additional-Exercises" class="headerlink" title="Additional Exercises"></a>Additional Exercises</h2><h3 id="DPV-9-4-Independent-Set"><a href="#DPV-9-4-Independent-Set" class="headerlink" title="DPV 9.4 Independent Set"></a>DPV 9.4 Independent Set</h3><p><strong>Algorithm:</strong></p>
+<ol>
+<li>Choose any node and add it to the independent set.</li>
+<li>Delete the node and its neighbors from the graph.</li>
+<li>Repeat until graph is empty.</li>
+</ol>
+<p><strong>Approximation ratio:</strong> $\alpha_A=1/(d+1)$, where $d$ is the maximum degree of the nodes in the graph.</p>
+<p><strong>Reasoning:</strong> The optimal independent set will have at most $|V|$ nodes. The approximate independent set will have at least $|V|/(d+1)$ nodes, because for every node we add, we delete at most $(d+1)$ nodes, i.e. for every $(d+1)$ nodes in the graph, there is at least one node in the independent set.</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/03/24/Google-CTF-Beginners-Quest-Notes/#more">Read More</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/algorithms/">algorithms</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
 </div>
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/12/Algo-final-review-NP-complete-problems/">
+                <span class="level-item">Algo final review - NP-complete problems</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -557,7 +597,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="CMouse&#39;s Blog" height="28">
+                    <img src="/images/logo.svg" alt="Algo final review - Approximation algorithms" height="28">
                 
                 </a>
                 <p class="is-size-7">
