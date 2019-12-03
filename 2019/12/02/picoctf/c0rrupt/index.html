@@ -11,7 +11,7 @@
 
     <title>
         
-          CMouse&#39;s Blog
+          c0rrupt - CMouse&#39;s Blog
         
     </title>
 
@@ -130,11 +130,29 @@ show_sidebar()
 </div>
 
 <div class="book-post">
-  <p>If 8 bits is called a byte and 4 bits is called a nibble, should 16 bits be called a mouthful?</p>
+  <h1 id="c0rrupt"><a href="#c0rrupt" class="headerlink" title="c0rrupt"></a>c0rrupt</h1><p>Category: Forensics<br>Points: 250 pts</p>
+<p>We found this <a href="https://2019shell1.picoctf.com/static/3435d990f1d20fe3563cbb897b4c96db/mystery" target="_blank" rel="noopener">file</a>. Recover the flag. You can also find the file in /problems/c0rrupt_0_1fcad1344c25a122a00721e4af86de13.</p>
 <hr>
-<p>Ah, so this is my blog. Here you can find my writeups for various CTFs as well as the occasional doodle.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> whoami</span><br></pre></td></tr></table></figure>
-<p>Computer science student, interested in security and CTFs. Enjoys reading and playing the piano. Lived in Tokyo as a toddler, Vancouver as a kid, Beijing as a teenager, New York as a grad student and moving to the Bay Area next year for my first full-time job.</p>
+<p>Running <code>binwalk</code> on <code>mystery</code> gives us:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DECIMAL       HEXADECIMAL     DESCRIPTION</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">91            0x5B            Zlib compressed data, compressed</span><br></pre></td></tr></table></figure>
+<p>There is Zlib compressed data at offset 91, which gives us suspicion that the file might be a PNG. Opening the file in a hex editor shows the trailer bytes <code>49 45 4E 44 AE 42 60 82</code>, which confirms our suspicion.</p>
+<p><img src="/images/picoctf/corrupt1.jpeg" alt="corrupt1"></p>
+<p>So lets try to fix the file header according to the PNG format.</p>
+<p>The first 8 bytes should be <code>89 50 4E 47 0D 0A 1A 0A</code>.</p>
+<p><img src="/images/picoctf/corrupt2.jpeg" alt="corrupt2"></p>
+<p>The next 25 bytes is the IHDR chunk. The length part should be <code>00 00 00 0d</code>. The chunk type should be <code>49 48 44 52</code>. Since we don’t know about the data, we’ll keep the next 13 bytes as they are. Finally, we compute the checksum, which should be <code>7c 8b ab 78</code> (Note: if you’re using <code>cksum</code>, remember to use <code>cksum -o 3</code> instead of the default algorithm when no options are supplied). Turns out only the chunk type is corrupted in this file.</p>
+<p><img src="/images/picoctf/corrupt3.jpeg" alt="corrupt3"></p>
+<p>Next are the sRGB, gAMA and pHYs chunks. We won’t go into the details of these. In fact, the fastest way to fix them is to take another challenge’s <code>flag.png</code> as reference and modify the bytes accordingly. We found that the only byte that differs is at 0x46, which we change to 0x00.</p>
+<p><img src="/images/picoctf/corrupt4.jpeg" alt="corrupt4"></p>
+<p>Finally, there is the IDAT chunk, which holds the actual image, compressed with zlib. We know that the data part of the chunk starts at 0x5B and ends at 0x318AB. So the length should be <code>00 03 18 51</code>. The type is <code>49 44 41 54</code>.</p>
+<p><img src="/images/picoctf/corrupt5.jpeg" alt="corrupt5"></p>
+<p>We’ve fixed our file!</p>
+<p><img src="/images/picoctf/corrupt6.jpeg" alt="corrupt6"></p>
+<p><strong>References:</strong></p>
+<p><a href="https://www.garykessler.net/library/file\_sigs.html" target="_blank" rel="noopener">https://www.garykessler.net/library/file\_sigs.html</a></p>
+<p><a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html" target="_blank" rel="noopener">http://www.libpng.org/pub/png/spec/1.2/PNG-Structure.html</a></p>
+<p><a href="http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html" target="_blank" rel="noopener">http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html</a></p>
+<p><a href="https://stackoverflow.com/questions/54845745/not-able-to-read-ihdr-chunk-of-a-png-file" target="_blank" rel="noopener">https://stackoverflow.com/questions/54845745/not-able-to-read-ihdr-chunk-of-a-png-file</a></p>
 
 </div>
 

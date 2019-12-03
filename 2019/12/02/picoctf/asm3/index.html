@@ -11,7 +11,7 @@
 
     <title>
         
-          CMouse&#39;s Blog
+          asm3 - CMouse&#39;s Blog
         
     </title>
 
@@ -130,11 +130,59 @@ show_sidebar()
 </div>
 
 <div class="book-post">
-  <p>If 8 bits is called a byte and 4 bits is called a nibble, should 16 bits be called a mouthful?</p>
+  <h1 id="asm3"><a href="#asm3" class="headerlink" title="asm3"></a>asm3</h1><p>Category: Reverse Engineering<br>Points: 300 pts</p>
+<p>What does asm3(0xaeed09cb,0xb7acde91,0xb7facecd) return? Submit the flag as a hexadecimal value (starting with ‘0x’). NOTE: Your submission for this question will NOT be in the normal flag format. <a href="https://2019shell1.picoctf.com/static/03606da9fe90cfe7e76b9d78259c0630/test.S" target="_blank" rel="noopener">Source</a> located in the directory at /problems/asm3_0_9cdf5fc9325b2a6276fb8e5908f0b5df.</p>
 <hr>
-<p>Ah, so this is my blog. Here you can find my writeups for various CTFs as well as the occasional doodle.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> whoami</span><br></pre></td></tr></table></figure>
-<p>Computer science student, interested in security and CTFs. Enjoys reading and playing the piano. Lived in Tokyo as a toddler, Vancouver as a kid, Beijing as a teenager, New York as a grad student and moving to the Bay Area next year for my first full-time job.</p>
+<p>Since machines are little endian, the parameters will be stored like this on the stack (addresses are relative to the base pointer):</p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>8</th>
+<th>9</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+<th>f</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value</td>
+<td>cb</td>
+<td>09</td>
+<td>ed</td>
+<td>ae</td>
+<td>91</td>
+<td>de</td>
+<td>ac</td>
+<td>b7</td>
+<td>cd</td>
+<td>ce</td>
+<td>fa</td>
+<td>b7</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;+3&gt;:   xor    eax,eax</span><br></pre></td></tr></table></figure>
+<p><code>eax</code> is set to 0.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;+5&gt;:   mov    ah,BYTE PTR [ebp+0xb]</span><br></pre></td></tr></table></figure>
+<p><code>ah</code> is set to 0xae.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;+8&gt;:   shl    ax,0x10</span><br></pre></td></tr></table></figure>
+<p><code>ax</code> becomes 0 again.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;+12&gt;:  sub    al,BYTE PTR [ebp+0xe]</span><br></pre></td></tr></table></figure>
+<p><code>al</code> becomes 0x54 (equivalent to ~0xac+1).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;+15&gt;:  add    ah,BYTE PTR [ebp+0xd]</span><br></pre></td></tr></table></figure>
+<p><code>ah</code> becomes 0xde.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;+18&gt;:  xor    ax,WORD PTR [ebp+0x12]</span><br></pre></td></tr></table></figure>
+<p><code>ax</code> becomes 0x69ae (0xde54^0xb7fa).</p>
+<p>The flag is 0x69ae.</p>
 
 </div>
 
