@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    
+      <link rel="icon" href="/favicon.ico">
+    
+
+    <title>
+        
+          asm4 - CMouse&#39;s Blog
+        
+    </title>
+
+    <!-- Spectre.css framework -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+    <!-- Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC" rel="stylesheet">
+    <!-- Noto Sans -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+
+    <!-- theme css & js -->
+    <link rel="stylesheet" href="/css/book.css">
+    <script src="/js/book.js"></script>
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zooming/2.1.1/zooming.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const zooming = new Zooming()
+    zooming.listen('img')
+})
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="book-container">
+    <div class="columns">
+      <div class="column col-2 hide-lg">
+        <div class="book-sidebar">
+  <h4 class="site-meta">
+    <a href="/">CMouse&#39;s Blog</a>
+  </h4>
+  <div class="sidebar-content">
+    <ul>
+<li><a href="/">Home</a></li>
+<li><a href="/picoctf/picoctf-2019">picoCTF 2019</a><ul>
+<li><a href="/picoctf/whitepages">WhitePages</a></li>
+<li><a href="/picoctf/c0rrupt">c0rrupt</a></li>
+<li><a href="/picoctf/webnet0">WebNet0</a></li>
+<li><a href="/picoctf/asm3">asm3</a></li>
+<li><a href="/picoctf/asm4">asm4</a></li>
+</ul>
+</li>
+<li><a href="/cyberforce/cyberforce-2019">CyberForce 2019</a><ul>
+<li><a href="/cyberforce/cyberforce-2019-recap-cathy">Cathy’s Recap</a></li>
+<li><a href="/cyberforce/anomaly-23">Anomaly 23</a></li>
+</ul>
+</li>
+<li><a href="/uncategorized/weird-cs-doodles">Weird CS Doodles</a></li>
+</ul>
+
+  </div>
+</div>
+
+<script src="/js/book-sidebar.js"></script>
+
+<script>
+collapse_sidebar(2)
+highlight_tab()
+show_sidebar()
+</script>
+      </div>
+
+      <div class="column col-8 col-lg-12">
+        <div class="book-content">
+          <div class="book-navbar">
+  <header class="navbar">
+  <section class="navbar-section">
+    <img class="navbar-icon" src="/favicon.ico">
+  </section>
+  <section class="navbar-center">
+    CMouse&#39;s Blog
+  </section>
+  <section class="navbar-section">
+    <label class="accordion-header c-hand" for="accordion-sidebar">
+      <i class="icon icon-menu"></i>
+    </label>
+  </section>
+</header>
+
+<div class="accordion">
+  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
+  <div class="accordion-body">
+    <ul>
+<li><a href="/">Home</a></li>
+<li><a href="/picoctf/picoctf-2019">picoCTF 2019</a><ul>
+<li><a href="/picoctf/whitepages">WhitePages</a></li>
+<li><a href="/picoctf/c0rrupt">c0rrupt</a></li>
+<li><a href="/picoctf/webnet0">WebNet0</a></li>
+<li><a href="/picoctf/asm3">asm3</a></li>
+<li><a href="/picoctf/asm4">asm4</a></li>
+</ul>
+</li>
+<li><a href="/cyberforce/cyberforce-2019">CyberForce 2019</a><ul>
+<li><a href="/cyberforce/cyberforce-2019-recap-cathy">Cathy’s Recap</a></li>
+<li><a href="/cyberforce/anomaly-23">Anomaly 23</a></li>
+</ul>
+</li>
+<li><a href="/uncategorized/weird-cs-doodles">Weird CS Doodles</a></li>
+</ul>
+
+  </div>
+</div>
+</div>
+
+<div class="book-post">
+  <h1 id="asm4"><a href="#asm4" class="headerlink" title="asm4"></a>asm4</h1><p>Category: Reverse Engineering<br>Points: 400 pts</p>
+<p>What will asm4(“picoCTF_75806”) return? Submit the flag as a hexadecimal value (starting with ‘0x’). NOTE: Your submission for this question will NOT be in the normal flag format. <a href="https://2019shell1.picoctf.com/static/97b85761d65b68113bf3c3f6143b17a6/test.S" target="_blank" rel="noopener">Source</a> located in the directory at /problems/asm4_6_0a1c480ca5c932037f143f80d653e3a8.</p>
+<hr>
+<p>After the initial setup, the stack looks like this:</p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ebp+8</td>
+<td>Address of “picoCTF_75806”</td>
+</tr>
+<tr>
+<td>ebp+4</td>
+<td>Return address</td>
+</tr>
+<tr>
+<td>ebp</td>
+<td>Old ebp</td>
+</tr>
+<tr>
+<td>ebp-4</td>
+<td>Old ebx</td>
+</tr>
+<tr>
+<td>ebp-8</td>
+<td></td>
+</tr>
+<tr>
+<td>ebp-0xc</td>
+<td>0x0</td>
+</tr>
+<tr>
+<td>ebp-0x10</td>
+<td>0x276</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;+23&gt;:  add    DWORD PTR [ebp-0xc],0x1</span><br><span class="line">&lt;+27&gt;:  mov    edx,DWORD PTR [ebp-0xc]</span><br><span class="line">&lt;+30&gt;:  mov    eax,DWORD PTR [ebp+0x8]</span><br><span class="line">&lt;+33&gt;:  add    eax,edx</span><br><span class="line">&lt;+35&gt;:  movzx  eax,BYTE PTR [eax]</span><br><span class="line">&lt;+38&gt;:  test   al,al</span><br><span class="line">&lt;+40&gt;:  jne    0x514 &lt;asm4+23&gt;</span><br></pre></td></tr></table></figure>
+<p>This part counts the number of characters in the input string and stores it at <code>ebp-0xc</code>. So after this part, the value stored at <code>ebp-0xc</code> will be 0xd.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;+42&gt;:  mov    DWORD PTR [ebp-0x8],0x1</span><br><span class="line">&lt;+49&gt;:  jmp    0x587 &lt;asm4+138&gt;</span><br></pre></td></tr></table></figure>
+<p>Stores 0x1 at <code>ebp-0x8</code>. Updated stack:</p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ebp-8</td>
+<td>0x1</td>
+</tr>
+<tr>
+<td>ebp-0xc</td>
+<td>0xd</td>
+</tr>
+<tr>
+<td>ebp-0x10</td>
+<td>0x276</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;+138&gt;: mov    eax,DWORD PTR [ebp-0xc]</span><br><span class="line">&lt;+141&gt;: sub    eax,0x1</span><br><span class="line">&lt;+144&gt;: cmp    DWORD PTR [ebp-0x8],eax</span><br><span class="line">&lt;+147&gt;: jl     0x530 &lt;asm4+51&gt;</span><br></pre></td></tr></table></figure>
+<p>0x1 is less than 0xc, so we jump to <code>asm4+51</code>.</p>
+<p>This is a long loop, so let’s dissect it little by little:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;+51&gt;:  mov    edx,DWORD PTR [ebp-0x8]</span><br><span class="line">&lt;+54&gt;:  mov    eax,DWORD PTR [ebp+0x8]</span><br><span class="line">&lt;+57&gt;:  add    eax,edx</span><br><span class="line">&lt;+59&gt;:  movzx  eax,BYTE PTR [eax]</span><br><span class="line">&lt;+62&gt;:  movsx  edx,al</span><br></pre></td></tr></table></figure>
+<p><code>edx</code> now contains <code>input_string[1]</code>, which is ‘i’.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;+65&gt;:  mov    eax,DWORD PTR [ebp-0x8]</span><br><span class="line">&lt;+68&gt;:  lea    ecx,[eax-0x1]</span><br><span class="line">&lt;+71&gt;:  mov    eax,DWORD PTR [ebp+0x8]</span><br><span class="line">&lt;+74&gt;:  add    eax,ecx</span><br><span class="line">&lt;+76&gt;:  movzx  eax,BYTE PTR [eax]</span><br><span class="line">&lt;+79&gt;:  movsx  eax,al</span><br></pre></td></tr></table></figure>
+<p><code>eax</code> now contains <code>input_string[0]</code>, which is ‘p’.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;+82&gt;:  sub    edx,eax</span><br><span class="line">&lt;+84&gt;:  mov    eax,edx</span><br><span class="line">&lt;+86&gt;:  mov    edx,eax</span><br><span class="line">&lt;+88&gt;:  mov    eax,DWORD PTR [ebp-0x10]</span><br><span class="line">&lt;+91&gt;:  lea    ebx,[edx+eax*1]</span><br></pre></td></tr></table></figure>
+<p>The value of <code>edx</code> becomes ‘i’ - ‘p’, which is -7. The value of <code>ebx</code> becomes -7 + 0x276 = 0x26f.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;+94&gt;:  mov    eax,DWORD PTR [ebp-0x8]</span><br><span class="line">&lt;+97&gt;:  lea    edx,[eax+0x1]</span><br><span class="line">&lt;+100&gt;: mov    eax,DWORD PTR [ebp+0x8]</span><br><span class="line">&lt;+103&gt;: add    eax,edx</span><br><span class="line">&lt;+105&gt;: movzx  eax,BYTE PTR [eax]</span><br><span class="line">&lt;+108&gt;: movsx  edx,al</span><br></pre></td></tr></table></figure>
+<p><code>edx</code> now contains <code>input_string[2]</code>, which is ‘c’.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;+111&gt;: mov    ecx,DWORD PTR [ebp-0x8]</span><br><span class="line">&lt;+114&gt;: mov    eax,DWORD PTR [ebp+0x8]</span><br><span class="line">&lt;+117&gt;: add    eax,ecx</span><br><span class="line">&lt;+119&gt;: movzx  eax,BYTE PTR [eax]</span><br><span class="line">&lt;+122&gt;: movsx  eax,al</span><br></pre></td></tr></table></figure>
+<p><code>eax</code> now contains <code>input_string[1]</code>, which is ‘i’.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;+125&gt;: sub    edx,eax</span><br><span class="line">&lt;+127&gt;: mov    eax,edx</span><br><span class="line">&lt;+129&gt;: add    eax,ebx</span><br><span class="line">&lt;+131&gt;: mov    DWORD PTR [ebp-0x10],eax</span><br><span class="line">&lt;+134&gt;: add    DWORD PTR [ebp-0x8],0x1</span><br><span class="line">&lt;+138&gt;: mov    eax,DWORD PTR [ebp-0xc]</span><br><span class="line">&lt;+141&gt;: sub    eax,0x1</span><br><span class="line">&lt;+144&gt;: cmp    DWORD PTR [ebp-0x8],eax</span><br><span class="line">&lt;+147&gt;: jl     0x530 &lt;asm4+51&gt;</span><br></pre></td></tr></table></figure>
+<p>The value of <code>edx</code> becomes ‘c’ - ‘i’, which is -6. The value stored at <code>ebp-0x10</code> becomes -6 + 0x26f = 0x269.</p>
+<p>Updated stack:</p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ebp-8</td>
+<td>0x2</td>
+</tr>
+<tr>
+<td>ebp-0xc</td>
+<td>0xd</td>
+</tr>
+<tr>
+<td>ebp-0x10</td>
+<td>0x269</td>
+</tr>
+</tbody>
+</table>
+<p>0x2 is less than 0xc, so we jump to <code>asm4+51</code> again.</p>
+<p>By now we can stop manually going over the loops, because we’ve already figured out what the code does. Essentially, for each <code>i</code> in 1 to 11, it calculates <code>input_string[i]</code> - <code>input_string[i-1]</code> + <code>input_string[i+1]</code> - <code>input_string[i]</code> and adds to the total, which is initially 0x276. So we can write a simple Python script for calculating this, and the result turns out to be 515, or 0x203 in hex.</p>
+
+</div>
+
+
+  <div class="book-comments">
+    
+
+
+
+
+  </div>
+
+
+<script src="/js/book-post.js"></script>
+        </div>
+      </div>
+
+      <div class="column col-2 hide-lg">
+        <div class="book-toc">
+  <div class="book-tocbot">
+  </div>
+  <div class="book-tocbot-menu">
+    <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+    <a onclick="go_top()">Back to top</a>
+    <a onclick="go_bottom()">Go to bottom</a>
+  </div>
+</div>
+
+<script>
+tocbot.init({
+  tocSelector: '.book-tocbot',
+  contentSelector: '.book-post',
+  headingSelector: 'h1, h2, h3, h4, h5',
+  collapseDepth: 2,
+  orderedList: false,
+  scrollSmooth: false,
+});
+
+function expand_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "collapse_toc()");
+  b.innerHTML = "Collapse all"
+}
+
+function collapse_toc(){
+  var b = document.querySelector(".book-toc-expand");
+  tocbot.init({
+    tocSelector: '.book-tocbot',
+    contentSelector: '.book-post',
+    headingSelector: 'h1, h2, h3, h4, h5',
+    collapseDepth: 2,
+    orderedList: false,
+    scrollSmooth: false,
+  });
+  b.setAttribute("onclick", "expand_toc()");
+  b.innerHTML = "Expand all"
+}
+
+function go_top() {
+  window.scrollTo(0, 0);
+}
+
+function go_bottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+</script>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

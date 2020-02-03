@@ -11,7 +11,7 @@
 
     <title>
         
-          CMouse&#39;s Blog
+          WebNet0 - CMouse&#39;s Blog
         
     </title>
 
@@ -134,12 +134,16 @@ show_sidebar()
 </div>
 
 <div class="book-post">
-  <p>If 8 bits is called a byte and 4 bits is called a nibble, should 16 bits be called a mouthful?</p>
+  <h1 id="WebNet0"><a href="#WebNet0" class="headerlink" title="WebNet0"></a>WebNet0</h1><p>Category: Forensics<br>Points: 350 pts</p>
+<p>We found this <a href="https://2019shell1.picoctf.com/static/470e17b168561f9eabdfa95e412dbe10/capture.pcap" target="_blank" rel="noopener">packet capture</a> and <a href="https://2019shell1.picoctf.com/static/470e17b168561f9eabdfa95e412dbe10/picopico.key" target="_blank" rel="noopener">key</a>. Recover the flag. You can also find the file in /problems/webnet0_0_363c0e92cf19b68e5b5c14efb37ed786.</p>
 <hr>
-<p><img src="/images/cover.jpg" alt="cover"></p>
-<p>Ah, so this is my blog. Here you can find my writeups for <!--various--> CTFs as well as the occasional doodle.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> whoami</span><br></pre></td></tr></table></figure>
-<p>Computer science student, interested in security and CTFs. Enjoys reading and playing the piano. Lived in Tokyo as a toddler, Vancouver as a kid, Beijing as a teenager, New York as a grad student and moving to the Bay Area this spring for my first full-time job.</p>
+<p>The packet capture looks like this:</p>
+<p><img src="/images/picoctf/webnet0-1.jpeg" alt="webnet0-1"></p>
+<p>As we can see, the TLS protocol is used, so the communication is encrypted.</p>
+<p>However, we are given the key. <strong>Wireshark Version 3</strong> allows you to apply a key to the packet capture, so the communication will be decoded automatically! For Mac users, the way is Wireshark -&gt; Preferences -&gt; RSA Keys -&gt; Add new keyfile. You can then add the downloaded keyfile.</p>
+<p><img src="/images/picoctf/webnet0-2.jpeg" alt="webnet0-2"></p>
+<p>Then, return to the packet capture and right-click on an encoded packet. Select “Decode As…” and select the key you’ve just added. You can then see the decoded communication! The flag is right here:</p>
+<p><img src="/images/picoctf/webnet0-3.jpeg" alt="webnet0-3"></p>
 
 </div>
 

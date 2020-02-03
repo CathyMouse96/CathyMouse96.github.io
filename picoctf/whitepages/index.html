@@ -11,7 +11,7 @@
 
     <title>
         
-          CMouse&#39;s Blog
+          WhitePages - CMouse&#39;s Blog
         
     </title>
 
@@ -134,12 +134,14 @@ show_sidebar()
 </div>
 
 <div class="book-post">
-  <p>If 8 bits is called a byte and 4 bits is called a nibble, should 16 bits be called a mouthful?</p>
+  <h1 id="WhitePages"><a href="#WhitePages" class="headerlink" title="WhitePages"></a>WhitePages</h1><p>Category: Forensics<br>Points: 250 pts</p>
+<p>I stopped using YellowPages and moved onto WhitePages… but <a href="https://2019shell1.picoctf.com/static/e134178261c6fa36e9058d5408118dd9/whitepages.txt" target="_blank" rel="noopener">the page they gave me</a> is all blank!</p>
 <hr>
-<p><img src="/images/cover.jpg" alt="cover"></p>
-<p>Ah, so this is my blog. Here you can find my writeups for <!--various--> CTFs as well as the occasional doodle.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> whoami</span><br></pre></td></tr></table></figure>
-<p>Computer science student, interested in security and CTFs. Enjoys reading and playing the piano. Lived in Tokyo as a toddler, Vancouver as a kid, Beijing as a teenager, New York as a grad student and moving to the Bay Area this spring for my first full-time job.</p>
+<p><code>whitepages.txt</code> opened in a hex editor looks like this:</p>
+<p><img src="/images/picoctf/whitepages.jpeg" alt="whitepages"></p>
+<p>As we can see, it consists of the SPACE character (20) and the EM SPACE character (e28083). Moreover, there seems to be a pattern: 4 EM SPACEs, 1 SPACE, 1 EM SPACE, 1 SPACE, 5 EM SPACEs, 1 SPACE…</p>
+<p>If we map each of the EM SPACEs to a <code>0</code> bit, and each of the SPACEs to a <code>1</code> bit, we get a bitstring. Decoding that bitstring with ASCII gives us the flag.</p>
+<p>The Python script for this part can be found at <a href="https://github.com/CathyMouse96/picoCTF-2019/blob/master/whitepages_solver.py" target="_blank" rel="noopener">here</a>.</p>
 
 </div>
 
