@@ -11,7 +11,7 @@
 
     <title>
         
-          WhitePages - CMouse&#39;s Blog
+          WebNet1 - CMouse&#39;s Blog
         
     </title>
 
@@ -136,14 +136,20 @@ show_sidebar()
 </div>
 
 <div class="book-post">
-  <h1 id="WhitePages"><a href="#WhitePages" class="headerlink" title="WhitePages"></a>WhitePages</h1><p>Category: Forensics<br>Points: 250 pts</p>
-<p>I stopped using YellowPages and moved onto WhitePages… but <a href="https://2019shell1.picoctf.com/static/e134178261c6fa36e9058d5408118dd9/whitepages.txt" target="_blank" rel="noopener">the page they gave me</a> is all blank!</p>
+  <h1 id="WebNet1"><a href="#WebNet1" class="headerlink" title="WebNet1"></a>WebNet1</h1><p>Category: Forensics<br>Points: 450 pts</p>
+<p>We found this <a href="https://2019shell1.picoctf.com/static/62437b61d31d915b837cce3396c204d9/capture.pcap" target="_blank" rel="noopener">packet capture</a> and <a href="https://2019shell1.picoctf.com/static/62437b61d31d915b837cce3396c204d9/picopico.key" target="_blank" rel="noopener">key</a>. Recover the flag. You can also find the file in /problems/webnet1_0_d63b267c607b8fedbae100068e010422.</p>
 <hr>
-<p><code>whitepages.txt</code> opened in a hex editor looks like this:</p>
-<p><img src="/images/picoctf/whitepages.jpeg" alt="whitepages"></p>
-<p>As we can see, it consists of the SPACE character (20) and the EM SPACE character (e28083). Moreover, there seems to be a pattern: 4 EM SPACEs, 1 SPACE, 1 EM SPACE, 1 SPACE, 5 EM SPACEs, 1 SPACE…</p>
-<p>If we map each of the EM SPACEs to a <code>0</code> bit, and each of the SPACEs to a <code>1</code> bit, we get a bitstring. Decoding that bitstring with ASCII gives us the flag.</p>
-<p>The Python script for this part can be found at <a href="https://github.com/CathyMouse96/picoCTF-2019/blob/master/whitepages_solver.py" target="_blank" rel="noopener">here</a>.</p>
+<p>Similar to <a href="/picoctf/webnet0">WebNet0</a>, we apply the key to the packet capture in Wireshark. However, this time the flag is not in the HTTP header. If we follow the HTTP stream (right-click on an HTTP packet -&gt; Follow -&gt; HTTP Stream), we see this:</p>
+<p><img src="/images/picoctf/webnet1-1.jpeg" alt="webnet1-1"></p>
+<p>Apparently, the server is sending a JPEG-format image to the client (“GET /vulture.jpg HTTP/1.1”). We can already see the flag in the screenshot above, but just out of curiousity, we can regenerate the image from the packets. To do so, we need to click on the packet marked as “HTTP/1.1 200 OK  (JPEG JFIF image)”:</p>
+<p><img src="/images/picoctf/webnet1-2.jpeg" alt="webnet1-2"></p>
+<p>Scroll down in the middle panel until we see “JPEG File Interchange Format”:</p>
+<p><img src="/images/picoctf/webnet1-3.jpeg" alt="webnet1-3"></p>
+<p>Right-click on “JPEG File Interchange Format” and select “Export Packet Bytes”. The resulting image is…</p>
+<p><img src="/images/picoctf/webnet1-4.jpeg" alt="webnet1-4"></p>
+<p>…Oh well. They did call the picture “vulture.jpg”. What did you expect?</p>
+<p><strong>References:</strong></p>
+<p>Techwalla: How to Get Images From Wireshark (<a href="https://www.techwalla.com/articles/how-to-get-images-from-wireshark" target="_blank" rel="noopener">Link</a>)</p>
 
 </div>
 
