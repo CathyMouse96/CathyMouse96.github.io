@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </li>
 <li><a href="/cyberforce/cyberforce-2019">CyberForce 2019</a><ul>
 <li><a href="/cyberforce/cyberforce-2019-recap-cathy">Cathy’s Recap</a></li>
+<li><a href="/cyberforce/anomaly-6">Anomaly 6</a></li>
 <li><a href="/cyberforce/anomaly-23">Anomaly 23</a></li>
 </ul>
 </li>
@@ -125,6 +126,7 @@ show_sidebar()
 </li>
 <li><a href="/cyberforce/cyberforce-2019">CyberForce 2019</a><ul>
 <li><a href="/cyberforce/cyberforce-2019-recap-cathy">Cathy’s Recap</a></li>
+<li><a href="/cyberforce/anomaly-6">Anomaly 6</a></li>
 <li><a href="/cyberforce/anomaly-23">Anomaly 23</a></li>
 </ul>
 </li>
@@ -138,10 +140,10 @@ show_sidebar()
 <div class="book-post">
   <h1 id="Cathy’s-Recap"><a href="#Cathy’s-Recap" class="headerlink" title="Cathy’s Recap"></a>Cathy’s Recap</h1><p>I’m writing this <del>because Dennis told me to</del> because I learned a lot through this experience and it would be meaningful to look back upon it someday.</p>
 <h2 id="Web-servers-and-web-frameworks"><a href="#Web-servers-and-web-frameworks" class="headerlink" title="Web servers and web frameworks"></a>Web servers and web frameworks</h2><p>NGINX is a web server. It took some Googling for me to figure out the difference between a web server (e.g. NGINX or Apache) and a web framework (e.g. Django or Flask).</p>
-<p>Traditionally, web servers communicate with application programs via Common Gateway Interface (CGI) to serve dynamic content. (TODO: Replace following diagram with actual image.)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">                                   CGI</span><br><span class="line">user -&gt; web server (static content) -&gt; application program (dynamic content)</span><br><span class="line">     &lt;-                             &lt;-</span><br></pre></td></tr></table></figure>
-<p>Similarly, for Python applications or frameworks, Web Server Gateway Interface (WSGI) is used. (TODO: Replace following diagram with actual image.)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">                                               WSGI</span><br><span class="line">user -&gt; server / gateway (e.g. Apache or NGINX) -&gt; application / framework (e.g. Django or Flask)</span><br><span class="line">     &lt;-                                         &lt;-</span><br></pre></td></tr></table></figure>
+<p>Traditionally, web servers communicate with application programs via Common Gateway Interface (CGI) to serve dynamic content.</p>
+<p><img src="/images/cyberforce/recap_1.png" alt="CGI (Common Gateway Interface)"></p>
+<p>Similarly, for Python applications or frameworks, Web Server Gateway Interface (WSGI) is used.</p>
+<p><img src="/images/cyberforce/recap_2.png" alt="WSGI (Web Server Gateway Interface)"></p>
 <p>So this is the relationship between a web server and a web framework.</p>
 <h2 id="NGINX-Reverse-Proxy"><a href="#NGINX-Reverse-Proxy" class="headerlink" title="NGINX Reverse Proxy"></a>NGINX Reverse Proxy</h2><p>NGINX can be configured to work as a reverse proxy. In the simplest case, the web server listens on an external port and proxies requests to different internal ports (on the <code>localhost</code> interface) based on the Uniform Resource Identifier (URI). For example, our Django web application is running at <code>localhost:8000</code> and our <code>shellinabox</code> app is running at <code>localhost:8080</code>. We don’t want to expose the ports 8000 and 8080, but we also want users to be able to access these applications. So we can configure our NGINX reverse proxy like this:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">	server 127.0.0.1:8000;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">upstream shell &#123;</span><br><span class="line">        server 127.0.0.1:8080;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">	listen 80;</span><br><span class="line">	location / &#123;</span><br><span class="line">		...</span><br><span class="line">		proxy_pass http://backend;</span><br><span class="line">	&#125;</span><br><span class="line">	location /shell &#123;</span><br><span class="line">		...</span><br><span class="line">		proxy_pass http://shell;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
