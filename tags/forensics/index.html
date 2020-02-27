@@ -11,7 +11,7 @@
 
     <title>
         
-          Anomaly 49 - CMouse&#39;s Blog
+          CMouse&#39;s Blog
         
     </title>
 
@@ -98,80 +98,49 @@ show_sidebar()
 
       <div class="column col-8 col-lg-12">
         <div class="book-content">
-          <div class="book-navbar">
-  <header class="navbar">
-  <section class="navbar-section">
-    <img class="navbar-icon" src="/favicon.ico">
-  </section>
-  <section class="navbar-center">
-    CMouse&#39;s Blog
-  </section>
-  <section class="navbar-section">
-    <label class="accordion-header c-hand" for="accordion-sidebar">
-      <i class="icon icon-menu"></i>
-    </label>
-  </section>
-</header>
+          <div class="book-archive">
+  <!-- Title -->
+  
+    <h2>Tags</h2>
+  
 
-<div class="accordion">
-  <input type="checkbox" id="accordion-sidebar" name="accordion-checkbox" hidden>
-  <div class="accordion-body">
-    <ul>
-<li><a href="/">Home</a></li>
-<li><a href="/picoctf/picoctf-2019">picoCTF 2019</a><ul>
-<li><a href="/picoctf/whitepages">WhitePages</a></li>
-<li><a href="/picoctf/c0rrupt">c0rrupt</a></li>
-<li><a href="/picoctf/webnet0">WebNet0</a></li>
-<li><a href="/picoctf/webnet1">WebNet1</a></li>
-<li><a href="/picoctf/asm3">asm3</a></li>
-<li><a href="/picoctf/asm4">asm4</a></li>
-</ul>
-</li>
-<li><a href="/cyberforce/cyberforce-2019">CyberForce 2019</a><ul>
-<li><a href="/cyberforce/cyberforce-2019-recap-cathy">Cathy’s Recap</a></li>
-<li><a href="/cyberforce/anomaly-6">Anomaly 6</a></li>
-<li><a href="/cyberforce/anomaly-21">Anomaly 21</a></li>
-<li><a href="/cyberforce/anomaly-23">Anomaly 23</a></li>
-<li><a href="/cyberforce/anomaly-45">Anomaly 45</a></li>
-<li><a href="/cyberforce/anomaly-49">Anomaly 49</a></li>
-</ul>
-</li>
-<li><a href="/uncategorized/weird-cs-doodles">Weird CS Doodles</a></li>
-</ul>
-
-  </div>
-</div>
-</div>
-
-<div class="book-post">
-  <h1 id="Anomaly-49"><a href="#Anomaly-49" class="headerlink" title="Anomaly 49"></a>Anomaly 49</h1><p>Points: 46</p>
-<p>Our wily hacker doesn’t want the snooping admins to see the data content that is being stolen and has used a few tricks to mix things up. From the pcap file, find the original data content that the hacker exfiltrated. Flag is in the “cfc{}” format. Submit the flag including the cfc tag.</p>
-<hr>
-<p>The provided file is a packet capture:</p>
-<p><img src="/images/cyberforce/anomaly_49_1.jpeg" alt="anomaly\_49\_1.jpeg"></p>
-<p>If we follow the first TCP stream, we can see this conversation between 10.0.0.10 (client) and 10.0.0.2 (server):</p>
-<p><img src="/images/cyberforce/anomaly_49_2.jpeg" alt="anomaly\_49\_2.jpeg"></p>
-<p>As we can see, the client is likely connected to a shell on the server. On the third line, the server listens on port 1338 and redirects any data received on this port to <code>wannahide.py</code>. Then, it runs <code>wannahide.py</code> with <code>important.txt</code> (likely the target file to exfiltrate) as the argument and <code>hidden_loot.txt</code> is generated. Finally, <code>hidden_loot.txt</code> is sent to the client.</p>
-<p>If we follow the second TCP stream, we can see this conversation between 10.0.0.10 (client) and 10.0.0.2 (server):</p>
-<p><img src="/images/cyberforce/anomaly_49_3.jpeg" alt="anomaly\_49\_3.jpeg"></p>
-<p>Note that the second conversation happens <strong>during</strong> the first conversation, not after. So this is likely the contents of <code>wannahide.py</code>. As we can see, this script subtracts 0xa from each character in the input file.</p>
-<p>If we follow the third TCP stream, we can see this conversation between 10.0.0.2 (client) and 10.0.0.10 (server):</p>
-<p><img src="/images/cyberforce/anomaly_49_4.jpeg" alt="anomaly\_49\_4.jpeg"></p>
-<p>This is likely the contents of <code>hidden_loot.txt</code>. To recover the original file, we simply add 0xa to each character of <code>hidden_loot.txt</code>. The result is “cfc{wirEshaRkStar}”.</p>
-
-</div>
-
-
-  <div class="book-comments">
+  
+    <!-- Split post by year -->
     
+  
 
+  
+      <div class="book-archive-years">
+          <h5>2020</h5>
+          <ul class="archive-list-item">
+          
+              <li>
+                <span>2020-02-27</span>
+                <a href="/cyberforce/anomaly-49/">
+                  Anomaly 49
+                </a>
+              </li>
+          
+          </ul>
+      </div>
+  
+      <div class="book-archive-years">
+          <h5>2019</h5>
+          <ul class="archive-list-item">
+          
+              <li>
+                <span>2019-12-03</span>
+                <a href="/cyberforce/anomaly-23/">
+                  Anomaly 23
+                </a>
+              </li>
+          
+          </ul>
+      </div>
+  
 
-
-
-  </div>
-
-
-<script src="/js/book-post.js"></script>
+  
+</div>
         </div>
       </div>
 

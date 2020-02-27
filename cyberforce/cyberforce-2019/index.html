@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="/cyberforce/cyberforce-2019">CyberForce 2019</a><ul>
 <li><a href="/cyberforce/cyberforce-2019-recap-cathy">Cathy’s Recap</a></li>
 <li><a href="/cyberforce/anomaly-6">Anomaly 6</a></li>
+<li><a href="/cyberforce/anomaly-21">Anomaly 21</a></li>
 <li><a href="/cyberforce/anomaly-23">Anomaly 23</a></li>
 <li><a href="/cyberforce/anomaly-45">Anomaly 45</a></li>
 <li><a href="/cyberforce/anomaly-49">Anomaly 49</a></li>
@@ -129,6 +130,7 @@ show_sidebar()
 <li><a href="/cyberforce/cyberforce-2019">CyberForce 2019</a><ul>
 <li><a href="/cyberforce/cyberforce-2019-recap-cathy">Cathy’s Recap</a></li>
 <li><a href="/cyberforce/anomaly-6">Anomaly 6</a></li>
+<li><a href="/cyberforce/anomaly-21">Anomaly 21</a></li>
 <li><a href="/cyberforce/anomaly-23">Anomaly 23</a></li>
 <li><a href="/cyberforce/anomaly-45">Anomaly 45</a></li>
 <li><a href="/cyberforce/anomaly-49">Anomaly 49</a></li>
@@ -144,10 +146,11 @@ show_sidebar()
 <div class="book-post">
   <h1 id="CyberForce-2019"><a href="#CyberForce-2019" class="headerlink" title="CyberForce-2019"></a>CyberForce-2019</h1><p><a href="/cyberforce/cyberforce-2019-recap-cathy">This</a> is my recap of my part in the preparation of the competition, including setting up NGINX as a reverse proxy and generating self-signed certificates for our website to be deployed via HTTPS.</p>
 <p>In addition to hardening our infrastructure in advance and defending it against hackers in real time, the competition also provided <strong>50 anomalies</strong> to analyze, which are basically CTF challenges. Here are write-ups for some of the challenges!</p>
-<h2 id="Solved-Problems"><a href="#Solved-Problems" class="headerlink" title="Solved Problems"></a>Solved Problems</h2><p><a href="/cyberforce/anomaly-6">Anomaly 6</a><br>An automated alert notified your security team to a potentially malicious script being executed on a users machine. Your job is to analyze the script to determine what it is doing. Note: During your analysis, the script should lead you to a sentence in English; this will be the answer you submit.</p>
-<p><a href="/cyberforce/anomaly-23">Anomaly 23: A Picture Paints a Thousand Bytes</a><br>A host on the corporate IT network has been compromised and is using DNS to phone home. This activity has been noticed and the DNS logs have been dumped. Analyze the DNS logs (Anomaly 23.log) and identify what information has been transferred. Hint: binwalk is your friend.</p>
-<p><a href="/cyberforce/anomaly-45">Anomaly 45</a><br>This is a simple “login” program for the Nuclear Power Plant. This program was created with no intention of security, so it was designed to have a single user and a single password. What is the flag? Answer format: flag {hidden_flag}</p>
+<h2 id="Solved-Problems"><a href="#Solved-Problems" class="headerlink" title="Solved Problems"></a>Solved Problems</h2><h3 id="Forensics"><a href="#Forensics" class="headerlink" title="Forensics"></a>Forensics</h3><p><a href="/cyberforce/anomaly-23">Anomaly 23: A Picture Paints a Thousand Bytes</a><br>A host on the corporate IT network has been compromised and is using DNS to phone home. This activity has been noticed and the DNS logs have been dumped. Analyze the DNS logs (Anomaly 23.log) and identify what information has been transferred. Hint: binwalk is your friend.</p>
 <p><a href="/cyberforce/anomaly-49">Anomaly 49</a><br>Our wily hacker doesn’t want the snooping admins to see the data content that is being stolen and has used a few tricks to mix things up. From the pcap file, find the original data content that the hacker exfiltrated. Flag is in the “cfc{}” format. Submit the flag including the cfc tag.</p>
+<h3 id="Reverse-Engineering"><a href="#Reverse-Engineering" class="headerlink" title="Reverse Engineering"></a>Reverse Engineering</h3><p><a href="/cyberforce/anomaly-6">Anomaly 6</a><br>An automated alert notified your security team to a potentially malicious script being executed on a users machine. Your job is to analyze the script to determine what it is doing. Note: During your analysis, the script should lead you to a sentence in English; this will be the answer you submit.</p>
+<p><a href="/cyberforce/anomaly-21">Anomaly 21: Shimo La Kumwagilia</a><br>Your IDS system generated an alert for a known malicious IP, 40.122.151.219, that appears to be part of a watering hole attack. Examine the accompanying packet capture file (Anomaly 21.pcap) from the affected subnet to determine the cause of the suspicious activity. If this is a true positive, examine the associated traffic to determine whether the compromise was successful. To solve, look for the flag{\&lt;string>} value. To answer, submit only the \&lt;string> portion of the flag. For example, if I were to uncover the flag with value: flag{d41d8cd98f00b204e9800998ecf8427e} I would submit d41d8cd98f00b204e9800998ecf8427e for the answer.</p>
+<p><a href="/cyberforce/anomaly-45">Anomaly 45</a><br>This is a simple “login” program for the Nuclear Power Plant. This program was created with no intention of security, so it was designed to have a single user and a single password. What is the flag? Answer format: flag {hidden_flag}</p>
 
 </div>
 
