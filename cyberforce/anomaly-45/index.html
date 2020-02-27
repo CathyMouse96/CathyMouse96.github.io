@@ -159,7 +159,8 @@ show_sidebar()
 <p><code>peu</code> reads user input again and stores it at <code>ebp+var_20</code>.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.text:0000066F                 mov     eax, [ebp+var_20]</span><br><span class="line">.text:00000672                 cmp     eax, 712h</span><br></pre></td></tr></table></figure>
 <p>It then compares the user input with 0x712. Thus we know the correct password is 0x712, which is 1810 in decimal.</p>
-<p>Running the executable, we see that this is indeed the correct credentials:<br><img src="/images/cyberforce/anomaly_45.jpeg" alt="anomaly\_45.jpeg"></p>
+<p>Running the executable, we see that this is indeed the correct credentials:</p>
+<p><img src="/images/cyberforce/anomaly_45.jpeg" alt="anomaly\_45.jpeg"></p>
 <p><strong>References:</strong><br>[1] <a href="https://stackoverflow.com/questions/6679846/what-is-i686-get-pc-thunk-bx-why-do-we-need-this-call" target="_blank" rel="noopener">https://stackoverflow.com/questions/6679846/what-is-i686-get-pc-thunk-bx-why-do-we-need-this-call</a></p>
 
 </div>
